@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No-Code Website Builder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>No-Code Website Builder</h1>
+    <div id="templates">
+      <button class="template-selector" data-template-name="template1">Template 1</button>
+      <button class="template-selector" data-template-name="template2">Template 2</button>
+    </div>      
+  </header>
+  <main>
+    <aside class="sidebar">
+      <h2>Tools</h2>
+      <div class="toolbox">
+        <button class="tool" draggable="true" data-type="text">Text</button>
+        <button class="tool" draggable="true" data-type="image">Image</button>
+        <button class="tool" draggable="true" data-type="button">Button</button>
+        <button class="tool" draggable="true" data-type="heading">Heading</button>
+        <button class="tool" draggable="true" data-type="list">List</button>
+        <button class="tool" draggable="true" data-type="form">Form</button>
+        <button class="tool" draggable="true" data-type="container">Container</button>
+        <!-- Add more tools as needed -->
+      </div>
+    </aside>
+    <section class="builder">
+      <div id="canvas" class="canvas">
+        <p id="placeholder">Drag elements here to start building your site</p>
+      </div>
+      <button id="preview-btn">Preview</button>
+    </section>
+    <aside class="properties-panel">
+      <h2>Properties</h2>
+      <div id="properties">
+        <label for="element-id">ID:</label>
+        <input type="text" id="element-id">
+        <label for="element-class">Class:</label>
+        <input type="text" id="element-class">
+        <label for="element-color">Color:</label>
+        <input type="color" id="element-color">
+        <label for="element-bg-color">Background Color:</label>
+        <input type="color" id="element-bg-color">
+        <label for="element-font-size">Font Size:</label>
+        <input type="number" id="element-font-size" min="1">
+        <!-- Add more properties as needed -->
+      </div>
+    </aside>
+  </main>
+  <footer>
+    <button id="export-btn">Export HTML</button>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
