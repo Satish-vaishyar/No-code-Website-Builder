@@ -26,6 +26,13 @@
         <button class="tool" draggable="true" data-type="form">Form</button>
         <button class="tool" draggable="true" data-type="container">Container</button>
         <!-- Add more tools as needed -->
+        <h3>Generate Text Response</h3>
+        <form id="sentenceForm">
+          <label for="sentence">Enter a Sentence:</label>
+          <input type="text" id="sentence" name="sentence" required>
+          <button type="submit">Generate Response</button>
+        </form>
+        <div id="responseContainer"></div>
       </div>
     </aside>
     <section class="builder">
@@ -55,5 +62,47 @@
     <button id="export-btn">Export HTML</button>
   </footer>
   <script src="script.js"></script>
+  <script>
+    document.getElementById('sentenceForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const sentence = document.getElementById('sentence').value;
+        console.log('Sentence:', sentence); // Log the sentence
+        await generateResponse(sentence);
+    });
+
+    async function generateResponse(sentence) {
+        const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: "grok-beta",
+                    messages: [
+                        { role: "system", content: "You are a test assistant." },
+                        { role: "user", content: sentence }
+                    ]
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log('Response:', data); // Log the response
+
+            const textResponse = data.choices[0].message.content; // Extract the text response
+            console.log('Text Response:', textResponse); // Log the text response
+            const responseContainer = document.getElementById('responseContainer');
+            responseContainer.innerHTML = `<p>${textResponse}</p>`;
+        } catch (error) {
+            console.error('Error generating response:', error);
+        }
+    }
+  </script>
 </body>
 </html>
