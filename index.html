@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>No-Code Website Builder</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .response_container {
+            border: 2px solid black;
+            padding: 20px;
+        }
+  </style>
 </head>
 <body>
   <header>
@@ -26,13 +32,14 @@
         <button class="tool" draggable="true" data-type="form">Form</button>
         <button class="tool" draggable="true" data-type="container">Container</button>
         <!-- Add more tools as needed -->
-        <h3>Generate Text Response</h3>
-        <form id="sentenceForm">
-          <label for="sentence">Enter a Sentence:</label>
-          <input type="text" id="sentence" name="sentence" required>
-          <button type="submit">Generate Response</button>
-        </form>
-        <div id="responseContainer"></div>
+        <div class="form-group">
+          <form id="sentenceForm">
+              <label for="sentence">Take Suggestion from AI</label>
+              <input type="text" id="sentence" name="sentence" placeholder="Enter a Sentence:">
+              <button type="submit">Generate Response</button>
+          </form>
+      </div>
+      <div id="responseContainer" class="response_container"></div>
       </div>
     </aside>
     <section class="builder">
@@ -71,38 +78,47 @@
     });
 
     async function generateResponse(sentence) {
-        const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
+    const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
 
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: "grok-beta",
-                    messages: [
-                        { role: "system", content: "You are a test assistant." },
-                        { role: "user", content: sentence }
-                    ]
-                })
-            });
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "grok-beta",
+                messages: [
+                    { role: "system", content: "You are a test assistant." },
+                    { role: "user", content: sentence }
+                ]
+            })
+        });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            console.log('Response:', data); // Log the response
-
-            const textResponse = data.choices[0].message.content; // Extract the text response
-            console.log('Text Response:', textResponse); // Log the text response
-            const responseContainer = document.getElementById('responseContainer');
-            responseContainer.innerHTML = `<p>${textResponse}</p>`;
-        } catch (error) {
-            console.error('Error generating response:', error);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+
+        const data = await response.json();
+        console.log('Response:', data); // Log the response
+
+        const textResponse = data.choices[0].message.content; // Extract the text response
+        console.log('Text Response:', textResponse); // Log the text response
+        const responseContainer = document.getElementById('responseContainer');
+        responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton">Copy Text</button>`;
+
+        const copyButton = document.getElementById('copyButton');
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(textResponse).then(() => {
+                alert('Text copied to clipboard');
+            }).catch(err => {
+                console.error('Error copying text:', err);
+            });
+        });
+    } catch (error) {
+        console.error('Error generating response:', error);
     }
-  </script>
+}
+</script>
 </body>
 </html>

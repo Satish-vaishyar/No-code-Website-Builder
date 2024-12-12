@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No-Code E-commerce Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 30%;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-right: 1px solid #ccc;
+            overflow-y: auto;
+        }
+
+        .main-area {
+            flex-grow: 1;
+            padding: 10px;
+            overflow: auto;
+            background-color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .product-preview {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+        }
+
+        .buy-now {
+            margin-top: 15px;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .response_container {
+            border: 2px solid black;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Shop Details</h2>
+        <div class="form-group">
+            <label for="shop-name">Shop Name</label>
+            <input type="text" id="shop-name" placeholder="Enter shop name">
+        </div>
+        <div class="form-group">
+            <label for="shop-address">Shop Address</label>
+            <textarea id="shop-address" rows="3" placeholder="Enter shop address"></textarea>
+        </div>
+        <h2>Add Product</h2>
+        <div class="form-group">
+            <label for="product-name">Product Name</label>
+            <input type="text" id="product-name" placeholder="Enter product name">
+        </div>
+        <div class="form-group">
+            <label for="product-description">Product Description</label>
+            <textarea id="product-description" rows="4" placeholder="Enter product description"></textarea>
+        </div><br>
+        <div class="response_generator">
+            <div class="form-group">
+                <form id="sentenceForm">
+                    <label for="sentence">Take Suggestion from AI</label>
+                    <input type="text" id="sentence" name="sentence" placeholder="Enter a Sentence:">
+                    <button type="submit">Generate Response</button>
+                </form>
+            </div>
+            <div id="responseContainer" class="response_container"></div>
+        </div><br><br><br>
+        <div class="form-group">
+            <label for="product-price">Product Price</label>
+            <input type="number" id="product-price" placeholder="Enter product price">
+        </div>
+        <div class="form-group">
+            <label for="product-image">Product Image</label>
+            <input type="file" id="product-image" accept="image/*">
+        </div>
+        <div class="form-group">
+            <label for="whatsapp-number">WhatsApp Number</label>
+            <input type="text" id="whatsapp-number" placeholder="Enter WhatsApp number">
+        </div>
+        <button onclick="addProduct()">Add Product</button>
+        <button onclick="exportHTML()">Export HTML</button>
+        <button onclick="previewWebsite()">Preview Website</button>
+    </div>
+    <div class="main-area" id="main-area">
+        <h2>Product Preview</h2>
+        <div id="shop-info" style="margin-bottom: 20px; display: none;">
+            <h2 id="shop-name-preview"></h2>
+            <p id="shop-address-preview"></p>
+            <hr>
+        </div>
+        <div id="product-preview" class="product-preview">
+            <p>No products added yet.</p>
+        </div>
+    </div>
+
+    <script>
+        const previewArea = document.getElementById('product-preview');
+        const shopInfo = document.getElementById('shop-info');
+        const shopNamePreview = document.getElementById('shop-name-preview');
+        const shopAddressPreview = document.getElementById('shop-address-preview');
+
+        let shopDisplayed = false;
+
+        function addProduct() {
+            const shopName = document.getElementById('shop-name').value;
+            const shopAddress = document.getElementById('shop-address').value;
+            const name = document.getElementById('product-name').value;
+            const description = document.getElementById('product-description').value;
+            const price = document.getElementById('product-price').value;
+            const imageInput = document.getElementById('product-image');
+            const whatsappNumber = document.getElementById('whatsapp-number').value;
+
+            if (!shopName || !shopAddress || !name || !description || !price || !imageInput.files[0] || !whatsappNumber) {
+                alert('Please fill all fields and select an image.');
+                return;
+            }
+
+            if (!shopDisplayed) {
+                shopNamePreview.textContent = shopName;
+                shopAddressPreview.textContent = `Address: ${shopAddress}`;
+                shopInfo.style.display = 'block';
+                shopDisplayed = true;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const whatsappLink = `https://wa.me/${whatsappNumber}?text=I'm%20interested%20in%20your%20product%20${encodeURIComponent(name)}.`;
+
+                const productHTML = `
+                    <div style="margin-bottom: 20px; border: 1px solid #ccc; padding: 15px;">
+                        <h3>${name}</h3>
+                        <p>${description}</p>
+                        <p><strong>Price:</strong> $${price}</p>
+                        <img src="${e.target.result}" alt="${name}">
+                        <a href="${whatsappLink}" class="buy-now" target="_blank">Buy Now</a>
+                    </div>
+                `;
+
+                if (previewArea.innerHTML.trim() === '<p>No products added yet.</p>') {
+                    previewArea.innerHTML = productHTML;
+                } else {
+                    previewArea.innerHTML += productHTML;
+                }
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        }
+
+        function exportHTML() {
+            const shopName = document.getElementById('shop-name').value;
+            const shopAddress = document.getElementById('shop-address').value;
+            const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${shopName}</title>
+</head>
+<body>
+    <h1>${shopName}</h1>
+    <p>Address: ${shopAddress}</p>
+    <div>${previewArea.innerHTML}</div>
+</body>
+</html>`;
+
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'ecommerce.html';
+            a.click();
+        }
+
+        function previewWebsite() {
+            const shopName = document.getElementById('shop-name').value;
+            const shopAddress = document.getElementById('shop-address').value;
+            const previewWindow = window.open('', '_blank');
+            const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${shopName}</title>
+</head>
+<body>
+    <h1>${shopName}</h1>
+    <p>Address: ${shopAddress}</p>
+    <div>${previewArea.innerHTML}</div>
+</body>
+</html>`;
+
+            previewWindow.document.write(htmlContent);
+            previewWindow.document.close();
+        }
+
+        // Response Generator
+        document.getElementById('sentenceForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const sentence = document.getElementById('sentence').value;
+            console.log('Sentence:', sentence); // Log the sentence
+            await generateResponse(sentence);
+        });
+
+        async function generateResponse(sentence) {
+    const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "grok-beta",
+                messages: [
+                    { role: "system", content: "You are a test assistant." },
+                    { role: "user", content: sentence }
+                ]
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Response:', data); // Log the response
+
+        const textResponse = data.choices[0].message.content; // Extract the text response
+        console.log('Text Response:', textResponse); // Log the text response
+        const responseContainer = document.getElementById('responseContainer');
+        responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton">Copy Text</button>`;
+
+        const copyButton = document.getElementById('copyButton');
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(textResponse).then(() => {
+                alert('Text copied to clipboard');
+            }).catch(err => {
+                console.error('Error copying text:', err);
+            });
+        });
+    } catch (error) {
+        console.error('Error generating response:', error);
+    }
+}
+</script>
+</body>
+</html>
