@@ -1,3 +1,4 @@
+/* General body styles */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -9,6 +10,7 @@ body {
     color: #333;
 }
 
+/* Header styles */
 header {
     width: 100%;
     background-color: #007BFF;
@@ -50,6 +52,7 @@ header nav ul li a:hover {
     color: #ffdd57;
 }
 
+/* Footer styles */
 footer {
     position: fixed;
     bottom: 0;
@@ -67,6 +70,7 @@ footer:hover {
     background-color: #0056b3;
 }
 
+/* Container styles */
 #container {
     display: flex;
     width: 100%;
@@ -74,6 +78,7 @@ footer:hover {
     margin-top: 20px;
 }
 
+/* Toolbar styles */
 #toolbar {
     margin: 10px;
     padding: 20px;
@@ -119,6 +124,7 @@ footer:hover {
     transform: translateY(-2px);
 }
 
+/* Workspace styles */
 #workspace {
     width: 100%;
     height: calc(100vh - 160px);
@@ -141,6 +147,7 @@ footer:hover {
     transform: translateY(-5px);
 }
 
+/* Properties panel styles */
 #properties {
     margin: 10px;
     padding: 20px;
@@ -167,6 +174,11 @@ footer:hover {
     color: #007BFF;
 }
 
+#icon-class {
+    display: none;
+}
+
+/* General button styles */
 button {
     padding: 10px;
     margin: 5px;
@@ -184,6 +196,7 @@ button:hover {
     transform: translateY(-2px);
 }
 
+/* Input and textarea styles */
 textarea, input[type="file"], input[type="number"], input[type="text"], input[type="color"], input[type="range"], select {
     width: 100%;
     margin: 10px 0;
@@ -197,6 +210,7 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     height: 100px;
 }
 
+/* AI response generator styles */
 .response_generator {
     border: 2px solid black;
     padding: 10px;
@@ -220,6 +234,7 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Delete button styles */
 #delete-element {
     background-color: red;
     color: white;
@@ -234,6 +249,7 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     transform: translateY(-2px);
 }
 
+/* Animation keyframes */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -249,6 +265,7 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     to { transform: scale(1); }
 }
 
+/* Animation classes */
 .fade-in {
     animation: fadeIn 1s ease-in-out;
 }
@@ -259,4 +276,125 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
 
 .zoom-in {
     animation: zoomIn 1s ease-in-out;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropbtn {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dropbtn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.dropdown-content {
+    display: none;
+    /* position: absolute; */
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 100%;
+    /* display: grid; */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: grid;
+    background-color: thistle;
+}
+
+.dropbtn:hover + .dropdown-content {
+    display: grid;
+    background-color: thistle;
+}
+
+.dropdown-content i, .dropdown-content .shape {
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content i:hover, .dropdown-content .shape:hover {
+    background-color: grey;
+}
+
+/* Shape styles */
+.shape {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+.shape.square {
+    /* No additional styles needed */
+}
+
+.shape.circle {
+    border-radius: 50%;
+}
+
+.shape.triangle {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid black;
+}
+
+.shape.rectangle {
+    width: 100px;
+    height: 50px;
+}
+
+.shape.oval {
+    width: 100px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.shape.pentagon {
+    width: 0;
+    border-style: solid;
+    border-width: 0 25px 43.3px 25px;
+    border-color: transparent transparent black transparent;
+    position: relative;
+}
+
+.shape.pentagon:after {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    width: 0;
+    border-style: solid;
+    border-width: 25px 25px 0 25px;
+    border-color: black transparent transparent transparent;
+}
+
+i {
+    color: black;
 }

@@ -1,13 +1,16 @@
+// Allow drop event
 function allowDrop(event) {
     event.preventDefault();
 }
 
+// Handle drag event
 function drag(event) {
     event.dataTransfer.setData("elementId", event.target.id);
     event.dataTransfer.setData("offsetX", event.offsetX);
     event.dataTransfer.setData("offsetY", event.offsetY);
 }
 
+// Handle drop event
 function drop(event) {
     event.preventDefault();
     var elementId = event.dataTransfer.getData("elementId");
@@ -15,6 +18,7 @@ function drop(event) {
     var offsetY = parseInt(event.dataTransfer.getData("offsetY"), 10);
     var element;
 
+    // Create new element if it doesn't exist
     if (!elementId.startsWith("element")) {
         var data = elementId;
         if (data === "text") {
@@ -68,6 +72,42 @@ function drop(event) {
             source.src = "https://www.w3schools.com/html/mov_bbb.mp4";
             source.type = "video/mp4";
             element.appendChild(source);
+        } else if (data === "icon") {
+            element = document.createElement("i");
+            element.className = "fas fa-star"; // Default icon
+        } else if (data === "icon-facebook") {
+            element = document.createElement("i");
+            element.className = "fab fa-facebook";
+        } else if (data === "icon-twitter") {
+            element = document.createElement("i");
+            element.className = "fab fa-twitter";
+        } else if (data === "icon-instagram") {
+            element = document.createElement("i");
+            element.className = "fab fa-instagram";
+        } else if (data === "icon-linkedin") {
+            element = document.createElement("i");
+            element.className = "fab fa-linkedin";
+        } else if (data === "icon-youtube") {
+            element = document.createElement("i");
+            element.className = "fab fa-youtube";
+        } else if (data === "shape-square") {
+            element = document.createElement("div");
+            element.className = "shape square";
+        } else if (data === "shape-circle") {
+            element = document.createElement("div");
+            element.className = "shape circle";
+        } else if (data === "shape-triangle") {
+            element = document.createElement("div");
+            element.className = "shape triangle";
+        } else if (data === "shape-rectangle") {
+            element = document.createElement("div");
+            element.className = "shape rectangle";
+        } else if (data === "shape-oval") {
+            element = document.createElement("div");
+            element.className = "shape oval";
+        } else if (data === "shape-pentagon") {
+            element = document.createElement("div");
+            element.className = "shape pentagon";
         }
         element.id = "element" + Date.now();
         element.draggable = true;
@@ -84,6 +124,7 @@ function drop(event) {
     element.style.top = (event.clientY - offsetY - event.target.offsetTop) + "px";
 }
 
+// Reposition element after dragging
 function repositionElement(event) {
     var offsetX = parseInt(event.dataTransfer.getData("offsetX"), 10);
     var offsetY = parseInt(event.dataTransfer.getData("offsetY"), 10);
@@ -93,6 +134,7 @@ function repositionElement(event) {
 
 var selectedElement = null;
 
+// Select an element to edit its properties
 function selectElement(element) {
     selectedElement = element;
     var properties = document.getElementById("properties");
@@ -128,8 +170,11 @@ function selectElement(element) {
     var tableCellSpacing = document.getElementById("table-cellspacing");
     var canvasBackgroundColor = document.getElementById("canvas-background-color");
     var canvasAnimation = document.getElementById("canvas-animation");
+    var iconClass = document.getElementById("icon-class");
     properties.style.display = "block";
-    if (element.tagName === "DIV" || element.tagName === "H1" || element.tagName === "H2" || element.tagName === "H3" || element.tagName === "H4" || element.tagName === "H5" || element.tagName === "H6" || element.tagName === "FOOTER" || element.tagName === "BUTTON" || element.tagName === "P" || element.tagName === "LI" || element.tagName === "TD") {
+
+    // Handle text and common properties
+    if (element.tagName === "DIV" || element.tagName === "H1" || element.tagName === "H2" || element.tagName === "H3" || element.tagName === "H4" || element.tagName === "H5" || element.tagName === "H6" || element.tagName === "FOOTER" || element.tagName === "BUTTON" || element.tagName === "P" || element.tagName === "LI" || element.tagName === "TD" || element.tagName === "I") {
         editorText.value = element.innerText;
         editorText.oninput = () => {
             element.innerText = editorText.value;
@@ -191,7 +236,7 @@ function selectElement(element) {
         elementHyperlink.oninput = () => {
             if (element.tagName !== "A") {
                 var link = document.createElement("a");
-                link.innerText = element.innerText;
+                link.innerHTML = element.innerHTML;
                 link.style.cssText = element.style.cssText;
                 link.href = elementHyperlink.value;
                 link.id = element.id;
@@ -223,6 +268,15 @@ function selectElement(element) {
             headerType.style.display = "block";
         } else {
             headerType.style.display = "none";
+        }
+        if (element.tagName === "I") {
+            iconClass.value = element.className;
+            iconClass.oninput = () => {
+                element.className = iconClass.value;
+            };
+            iconClass.style.display = "block";
+        } else {
+            iconClass.style.display = "none";
         }
         editorImage.style.display = "none";
         imageWidth.style.display = "none";
@@ -256,6 +310,7 @@ function selectElement(element) {
         canvasBackgroundColor.style.display = "none";
         canvasAnimation.style.display = "none";
     } else if (element.tagName === "IMG") {
+        // Handle image properties
         editorImage.onchange = (event) => {
             var reader = new FileReader();
             reader.onload = function(e) {
@@ -308,6 +363,7 @@ function selectElement(element) {
         canvasBackgroundColor.style.display = "none";
         canvasAnimation.style.display = "none";
     } else if (element.tagName === "VIDEO") {
+        // Handle video properties
         videoSrc.value = element.querySelector("source").src;
         videoSrc.oninput = () => {
             element.querySelector("source").src = videoSrc.value;
@@ -354,6 +410,7 @@ function selectElement(element) {
         canvasBackgroundColor.style.display = "none";
         canvasAnimation.style.display = "none";
     } else if (element.tagName === "TABLE") {
+        // Handle table properties
         tableRows.value = element.rows.length;
         tableCols.value = element.rows[0].cells.length;
         tableBorder.value = window.getComputedStyle(element).border;
@@ -455,6 +512,7 @@ function selectElement(element) {
     canvasAnimation.style.display = "block";
 }
 
+// Delete selected element
 function deleteElement() {
     if (selectedElement) {
         selectedElement.remove();
@@ -463,6 +521,7 @@ function deleteElement() {
     }
 }
 
+// Convert RGB color to HEX
 function rgbToHex(rgb) {
     var result = rgb.match(/\d+/g).map(function(x) {
         return parseInt(x).toString(16).padStart(2, '0');
@@ -470,6 +529,7 @@ function rgbToHex(rgb) {
     return "#" + result.join('');
 }
 
+// Export project as HTML file
 function exportProject() {
     var workspace = document.getElementById("workspace");
     var htmlContent = `
@@ -479,6 +539,7 @@ function exportProject() {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Exported Project</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -501,6 +562,55 @@ function exportProject() {
                     background-color: white;
                     position: relative;
                 }
+                .shape {
+                    width: 50px;
+                    height: 50px;
+                    background-color: white;
+                    border: 2px solid black;
+                }
+                .shape.circle {
+                    border-radius: 50%;
+                }
+                .shape.triangle {
+                    width: 0;
+                    height: 0;
+                    border-left: 25px solid transparent;
+                    border-right: 25px solid transparent;
+                    border-bottom: 50px solid black;
+                }
+                .shape.rectangle {
+                    width: 100px;
+                    height: 50px;
+                }
+                .shape.oval {
+                    width: 100px;
+                    height: 50px;
+                    border-radius: 50%;
+                }
+                .shape.pentagon {
+                    width: 0;
+                    border-style: solid;
+                    border-width: 0 25px 43.3px 25px;
+                    border-color: transparent transparent black transparent;
+                    position: relative;
+                }
+                .shape.pentagon:after {
+                    content: "";
+                    position: absolute;
+                    top: -25px;
+                    left: -25px;
+                    width: 0;
+                    border-style: solid;
+                    border-width: 25px 25px 0 25px;
+                    border-color: black transparent transparent transparent;
+                }
+                .fab, .fas {
+                    font-size: 24px;
+                    cursor: pointer;
+                    text-align: center;
+                    padding: 10px;
+                    transition: background-color 0.3s ease;
+                }
             </style>
         </head>
         <body>
@@ -511,7 +621,7 @@ function exportProject() {
                 ${workspace.innerHTML.replace(/contentEditable="true"/g, '')}
             </div>
             <footer>
-                <p>&copy; 2023 No-Code Website Builder</p>
+                <p>&copy; 2024 No-Code Website Builder</p>
             </footer>
             <script>
                 // Add any necessary JavaScript here
@@ -524,9 +634,10 @@ function exportProject() {
     saveAs(htmlBlob, "index.html");
 }
 
+// Live preview of the project
 function livePreview() {
     var workspace = document.getElementById("workspace");
-    var htmlContent = workspace.innerHTML;
+    var htmlContent = workspace.innerHTML; // Capture the current state of the workspace
     var previewWindow = window.open("", "_blank");
     previewWindow.document.write(`
         <!DOCTYPE html>
@@ -535,6 +646,7 @@ function livePreview() {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Live Preview</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -554,6 +666,55 @@ function livePreview() {
                     background-color: white;
                     position: relative;
                 }
+                .shape {
+                    width: 50px;
+                    height: 50px;
+                    background-color: white;
+                    border: 2px solid black;
+                }
+                .shape.circle {
+                    border-radius: 50%;
+                }
+                .shape.triangle {
+                    width: 0;
+                    height: 0;
+                    border-left: 25px solid transparent;
+                    border-right: 25px solid transparent;
+                    border-bottom: 50px solid black;
+                }
+                .shape.rectangle {
+                    width: 100px;
+                    height: 50px;
+                }
+                .shape.oval {
+                    width: 100px;
+                    height: 50px;
+                    border-radius: 50%;
+                }
+                .shape.pentagon {
+                    width: 0;
+                    border-style: solid;
+                    border-width: 0 25px 43.3px 25px;
+                    border-color: transparent transparent black transparent;
+                    position: relative;
+                }
+                .shape.pentagon:after {
+                    content: "";
+                    position: absolute;
+                    top: -25px;
+                    left: -25px;
+                    width: 0;
+                    border-style: solid;
+                    border-width: 25px 25px 0 25px;
+                    border-color: black transparent transparent transparent;
+                }
+                .fab, .fas {
+                    font-size: 24px;
+                    cursor: pointer;
+                    text-align: center;
+                    padding: 10px;
+                    transition: background-color 0.3s ease;
+                }
             </style>
         </head>
         <body>
@@ -561,7 +722,7 @@ function livePreview() {
                 <h1>Live Preview</h1>
             </header>
             <div id="workspace">
-                ${htmlContent}
+                ${htmlContent} <!-- Insert the captured HTML content -->
             </div>
             <footer>
                 <p>&copy; 2023 No-Code Website Builder</p>

@@ -6,6 +6,7 @@
     <title>No-Code Website Builder</title>
     <link rel="stylesheet" href="blank_webpage.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>
@@ -15,7 +16,6 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li></li>
             </ul>
         </nav>
     </header>
@@ -32,6 +32,25 @@
             <button draggable="true" ondragstart="drag(event)" id="list">List</button>
             <button draggable="true" ondragstart="drag(event)" id="table">Table</button>
             <button draggable="true" ondragstart="drag(event)" id="video">Video</button>
+            <div id="icon-dropdown" class="dropdown">
+                <button class="dropbtn">Icons</button>
+                <div class="dropdown-content">
+                    <i draggable="true" ondragstart="drag(event)" id="icon-facebook" class="fab fa-facebook"></i>
+                    <i draggable="true" ondragstart="drag(event)" id="icon-twitter" class="fab fa-twitter"></i>
+                    <i draggable="true" ondragstart="drag(event)" id="icon-instagram" class="fab fa-instagram"></i>
+                    <i draggable="true" ondragstart="drag(event)" id="icon-linkedin" class="fab fa-linkedin"></i>
+                    <i draggable="true" ondragstart="drag(event)" id="icon-youtube" class="fab fa-youtube"></i>
+                </div>
+            </div>
+            <div id="shape-dropdown" class="dropdown">
+                <button class="dropbtn">Shapes</button>
+                <div class="dropdown-content">
+                    <div draggable="true" ondragstart="drag(event)" id="shape-square" class="shape square"></div>
+                    <div draggable="true" ondragstart="drag(event)" id="shape-circle" class="shape circle"></div>
+                    <div draggable="true" ondragstart="drag(event)" id="shape-rectangle" class="shape rectangle"></div>
+                    <div draggable="true" ondragstart="drag(event)" id="shape-oval" class="shape oval"></div>
+                </div>
+            </div>
 
             <!-- AI Response Generator -->
             <div class="response_generator">
@@ -104,13 +123,13 @@
                 <option value="slide-in">Slide In</option>
                 <option value="zoom-in">Zoom In</option>
             </select>
+            <input type="text" id="icon-class" placeholder="Icon Class (e.g., fas fa-star)">
             <button id="delete-element" onclick="deleteElement()">Delete Element</button>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="blank_webpage.js"></script>
-
 
     <script>
         // AI Response Generator
@@ -122,47 +141,47 @@
         });
 
         async function generateResponse(sentence) {
-    const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
+            const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
 
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: "grok-beta",
-                messages: [
-                    { role: "system", content: "You are a test assistant." },
-                    { role: "user", content: sentence }
-                ]
-            })
-        });
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: "grok-beta",
+                        messages: [
+                            { role: "system", content: "You are a test assistant." },
+                            { role: "user", content: sentence }
+                        ]
+                    })
+                });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                console.log('Response:', data); // Log the response
+
+                const textResponse = data.choices[0].message.content; // Extract the text response
+                console.log('Text Response:', textResponse); // Log the text response
+                const responseContainer = document.getElementById('responseContainer');
+                responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton">Copy Text</button>`;
+
+                const copyButton = document.getElementById('copyButton');
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(textResponse).then(() => {
+                        alert('Text copied to clipboard');
+                    }).catch(err => {
+                        console.error('Error copying text:', err);
+                    });
+                });
+            } catch (error) {
+                console.error('Error generating response:', error);
+            }
         }
-
-        const data = await response.json();
-        console.log('Response:', data); // Log the response
-
-        const textResponse = data.choices[0].message.content; // Extract the text response
-        console.log('Text Response:', textResponse); // Log the text response
-        const responseContainer = document.getElementById('responseContainer');
-        responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton">Copy Text</button>`;
-
-        const copyButton = document.getElementById('copyButton');
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(textResponse).then(() => {
-                alert('Text copied to clipboard');
-            }).catch(err => {
-                console.error('Error copying text:', err);
-            });
-        });
-    } catch (error) {
-        console.error('Error generating response:', error);
-    }
-}
     </script>
     <footer>
         <p>&copy; 2024 No-Code Website Builder</p>
