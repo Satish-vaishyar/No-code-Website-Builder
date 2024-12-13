@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No-Code Website Builder</title>
+    <link rel="stylesheet" href="blank_webpage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>No-Code Website Builder</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="container">
+        <div id="toolbar">
+            <h2>Tool Box</h2>
+            <!-- Drag-and-Drop Elements -->
+            <button draggable="true" ondragstart="drag(event)" id="text">Text</button>
+            <button draggable="true" ondragstart="drag(event)" id="image">Image</button>
+            <button draggable="true" ondragstart="drag(event)" id="button">Button</button>
+            <button draggable="true" ondragstart="drag(event)" id="header">Header</button>
+            <button draggable="true" ondragstart="drag(event)" id="footer">Footer</button>
+            <button draggable="true" ondragstart="drag(event)" id="paragraph">Paragraph</button>
+            <button draggable="true" ondragstart="drag(event)" id="list">List</button>
+            <button draggable="true" ondragstart="drag(event)" id="table">Table</button>
+            <button draggable="true" ondragstart="drag(event)" id="video">Video</button>
+
+            <!-- AI Response Generator -->
+            <div class="response_generator">
+                <div class="form-group">
+                    <form id="sentenceForm">
+                        <label for="sentence">Take Suggestion from AI</label>
+                        <input type="text" id="sentence" name="sentence" class="response_generator_text" style="width: min-content; margin: 10px; padding: 10px;" placeholder="Enter a Sentence:">
+                        <button type="submit">Generate Response</button>
+                    </form>
+                </div>
+                <div id="responseContainer" class="response_container"></div>
+            </div><br>
+
+            <button onclick="exportProject()" style="margin-top: auto;">Export</button>
+            <button onclick="livePreview()" style="margin-bottom: 70px;">Live Preview</button>
+        </div>
+        <div id="workspace" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 100%; height: calc(100vh - 100px);">
+            <!-- Live Preview Workspace -->
+        </div>
+        <div id="properties" style="display: none;">
+            <h2>Properties</h2>
+            <!-- Properties Section -->
+            <textarea id="editor-text" placeholder="Edit text here..."></textarea>
+            <input type="file" id="editor-image" accept="image/*">
+            <input type="number" id="image-width" placeholder="Width (px)">
+            <input type="number" id="image-height" placeholder="Height (px)">
+            <input type="color" id="element-color" placeholder="Color">
+            <input type="text" id="element-font-size" placeholder="Font Size (px)">
+            <input type="text" id="element-background-color" placeholder="Background Color">
+            <input type="text" id="element-border" placeholder="Border">
+            <input type="text" id="element-padding" placeholder="Padding">
+            <input type="number" id="image-radius" placeholder="Border Radius (px)">
+            <input type="text" id="element-margin" placeholder="Margin">
+            <input type="text" id="element-width" placeholder="Width (px)">
+            <input type="text" id="element-height" placeholder="Height (px)">
+            <input type="text" id="element-text-align" placeholder="Text Align">
+            <input type="text" id="element-display" placeholder="Display">
+            <select id="header-type">
+                <option value="H1">H1</option>
+                <option value="H2">H2</option>
+                <option value="H3">H3</option>
+                <option value="H4">H4</option>
+                <option value="H5">H5</option>
+                <option value="H6">H6</option>
+            </select>
+            <select id="element-font-family">
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Courier New">Courier New</option>
+            </select>
+            <button id="element-bold">Bold</button>
+            <button id="element-italic">Italic</button>
+            <button id="element-underline">Underline</button>
+            <input type="text" id="element-hyperlink" placeholder="Hyperlink">
+            <input type="text" id="video-src" placeholder="Video Source URL">
+            <input type="number" id="video-width" placeholder="Video Width (px)">
+            <input type="number" id="video-height" placeholder="Video Height (px)">
+            <input type="text" id="table-rows" placeholder="Number of Rows">
+            <input type="text" id="table-cols" placeholder="Number of Columns">
+            <input type="text" id="table-border" placeholder="Table Border">
+            <input type="text" id="table-padding" placeholder="Table Padding">
+            <input type="text" id="table-margin" placeholder="Table Margin">
+            <input type="text" id="table-cellspacing" placeholder="Cell Spacing">
+            <input type="color" id="canvas-background-color" placeholder="Canvas Background Color">
+            <select id="canvas-animation">
+                <option value="">None</option>
+                <option value="fade-in">Fade In</option>
+                <option value="slide-in">Slide In</option>
+                <option value="zoom-in">Zoom In</option>
+            </select>
+            <button id="delete-element" onclick="deleteElement()">Delete Element</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="blank_webpage.js"></script>
+
+
+    <script>
+        // AI Response Generator
+        document.getElementById('sentenceForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const sentence = document.getElementById('sentence').value;
+            console.log('Sentence:', sentence); // Log the sentence
+            await generateResponse(sentence);
+        });
+
+        async function generateResponse(sentence) {
+    const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "grok-beta",
+                messages: [
+                    { role: "system", content: "You are a test assistant." },
+                    { role: "user", content: sentence }
+                ]
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Response:', data); // Log the response
+
+        const textResponse = data.choices[0].message.content; // Extract the text response
+        console.log('Text Response:', textResponse); // Log the text response
+        const responseContainer = document.getElementById('responseContainer');
+        responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton">Copy Text</button>`;
+
+        const copyButton = document.getElementById('copyButton');
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(textResponse).then(() => {
+                alert('Text copied to clipboard');
+            }).catch(err => {
+                console.error('Error copying text:', err);
+            });
+        });
+    } catch (error) {
+        console.error('Error generating response:', error);
+    }
+}
+    </script>
+    <footer>
+        <p>&copy; 2024 No-Code Website Builder</p>
+    </footer>
+</body>
+</html>
