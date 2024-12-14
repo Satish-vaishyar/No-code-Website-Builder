@@ -1,0 +1,273 @@
+body {
+    font-family: 'Times New Roman', 'Arial', 'sans-serif';
+    margin: 0;
+    padding: 0;
+    background-color: #f5e0e0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    min-height: 70px;
+    border-bottom: #77aaff 3px solid;
+    border-radius: 5px;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+header ul {
+    padding: 0;
+    list-style: none;
+}
+
+header li {
+    float: left;
+    display: inline;
+    padding: 0 20px;
+}
+
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header nav {
+    float: right;
+    margin-top: 10px;
+}
+
+#main {
+    padding: 20px;
+    background: #fff;
+    margin-top: 20px;
+    width: 60%;
+    margin-right: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin: 20px 0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea,
+form input[type="date"],
+form input[type="url"],
+form input[type="file"],
+form select {
+    width: 96%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form input[type="submit"] {
+    display: block;
+    width: 80%;
+    background: #333;
+    color: #fff;
+    border: 0;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+form input[type="submit"]:hover {
+    background: #555;
+}
+
+#resume-preview {
+    width: 595px;
+    height: 842px;
+    border: 1px solid #333;
+    padding: 20px;
+    background: #fff;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-left: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    float: left;
+    margin-right: 20px;
+}
+
+#profile-info {
+    overflow: hidden;
+}
+
+#profile-info h2 {
+    margin: 0;
+}
+
+.contact-info {
+    font-size: 10px;
+    margin-top: 5px;
+    width: 120px;
+    height: 140px;
+}
+
+.contact-info img {
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.resume-section {
+    margin-bottom: 20px;
+}
+
+.resume-section h3 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.resume-section p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.role {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    border-bottom: 2px solid #333;
+    margin-left: 140px;
+}
+
+.bio {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.certification {
+    margin: 5px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.main-content {
+    display: flex;
+}
+
+.other-section {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.add-more {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-more:hover {
+    background: #555;
+}
+
+.certification_preview {
+    margin-top: 20px;
+}
+
+.certification_preview h3 {
+    border-bottom: 2px solid #333;
+}
+
+.languages_preview {
+    margin-top: 20px;
+}
+
+.languages_preview h3 {
+    border-bottom: 2px solid #333;
+}
+
+.skills_preview h3 {
+    border-bottom: 2px solid #333;
+}
+
+.interests_preview {
+    margin-top: 20px;
+}
+
+.interests_preview h3 {
+    border-bottom: 2px solid #333;
+}
+
+.education_preview {
+    margin-top: 20px;
+}
+
+.education_preview h3 {
+    border-bottom: 2px solid #333;
+}
+
+.education_preview p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#export-options {
+    margin-top: 20px;
+}
+
+#export-options label {
+    margin-right: 10px;
+}
+
+#export-options select {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#export-options button {
+    padding: 5px 10px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#export-options button:hover {
+    background: #555;
+}
