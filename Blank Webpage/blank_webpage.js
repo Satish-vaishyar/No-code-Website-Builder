@@ -1,10 +1,11 @@
 // Allow drop event
 function allowDrop(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default behavior to allow drop
 }
 
 // Handle drag event
 function drag(event) {
+    // Store the element ID and offset positions in the dataTransfer object
     event.dataTransfer.setData("elementId", event.target.id);
     event.dataTransfer.setData("offsetX", event.offsetX);
     event.dataTransfer.setData("offsetY", event.offsetY);
@@ -12,7 +13,7 @@ function drag(event) {
 
 // Handle drop event
 function drop(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default behavior
     var elementId = event.dataTransfer.getData("elementId");
     var offsetX = parseInt(event.dataTransfer.getData("offsetX"), 10);
     var offsetY = parseInt(event.dataTransfer.getData("offsetY"), 10);
@@ -21,6 +22,7 @@ function drop(event) {
     // Create new element if it doesn't exist
     if (!elementId.startsWith("element")) {
         var data = elementId;
+        // Create different elements based on the data type
         if (data === "text") {
             element = document.createElement("div");
             element.contentEditable = true;
@@ -109,6 +111,7 @@ function drop(event) {
             element = document.createElement("div");
             element.className = "shape pentagon";
         }
+        // Set element properties
         element.id = "element" + Date.now();
         element.draggable = true;
         element.ondragstart = drag;
@@ -119,6 +122,7 @@ function drop(event) {
         element = document.getElementById(elementId);
     }
 
+    // Position the element
     element.style.position = "absolute";
     element.style.left = (event.clientX - offsetX - event.target.offsetLeft) + "px";
     element.style.top = (event.clientY - offsetY - event.target.offsetTop) + "px";
