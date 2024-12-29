@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <!-- Link to external CSS and libraries -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Header section -->
+    <header class="bg-dark text-white text-center py-3">
+        <h1>My Portfolio</h1>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Editable container for user input -->
+            <div class="col-md-3 editable-container">
+                <h2>Edit Your Portfolio</h2>
+                <label for="headerInput"><i class="fas fa-heading"></i> Header Text:</label>
+                <input type="text" id="headerInput" class="form-control" value="My Portfolio">
+                <label for="nameInput"><i class="fas fa-user"></i> Name:</label>
+                <input type="text" id="nameInput" class="form-control" value="UnSeen Geeks">
+                <label for="titleInput"><i class="fas fa-briefcase"></i> Role:</label>
+                <input type="text" id="titleInput" class="form-control" value="Web Developer">
+                <label for="imageInput"><i class="fas fa-image"></i> Profile Image URL:</label>
+                <input type="text" id="imageInput" class="form-control" value="profile.jpg">
+                <label for="aboutInput"><i class="fas fa-info-circle"></i> About Me:</label>
+                <textarea id="aboutInput" class="form-control">Write something about yourself here...</textarea>
+                <label for="educationInput"><i class="fas fa-graduation-cap"></i> Education:</label>
+                <textarea id="educationInput" class="form-control">List your educational background here...</textarea>
+                <label for="projectsInput"><i class="fas fa-project-diagram"></i> Projects:</label>
+                <textarea id="projectsInput" class="form-control">List your projects here...</textarea>
+                <label for="skillsInput"><i class="fas fa-tools"></i> Skills:</label>
+                <textarea id="skillsInput" class="form-control">List your skills here...</textarea>
+                <label for="pastCareerInput"><i class="fas fa-history"></i> Past Career:</label>
+                <textarea id="pastCareerInput" class="form-control">Describe your past career here...</textarea>
+                <label for="futureGoalsInput"><i class="fas fa-bullseye"></i> Future Goals:</label>
+                <textarea id="futureGoalsInput" class="form-control">Describe your future goals here...</textarea>
+                <label for="mobileInput"><i class="fas fa-phone"></i> Mobile No.:</label>
+                <input type="text" id="mobileInput" class="form-control" value="123-456-7890">
+                <label for="emailInput"><i class="fas fa-envelope"></i> Email:</label>
+                <input type="email" id="emailInput" class="form-control" value="unseen.geeks@example.com">
+                <label for="linkedinInput"><i class="fab fa-linkedin"></i> LinkedIn:</label>
+                <input type="text" id="linkedinInput" class="form-control" value="https://linkedin.com/in/unseengeeks">
+                <label for="githubInput"><i class="fab fa-github"></i> GitHub:</label>
+                <input type="text" id="githubInput" class="form-control" value="https://github.com/unseengeeks">
+                <label for="facebookInput"><i class="fab fa-facebook"></i> Facebook:</label>
+                <input type="text" id="facebookInput" class="form-control" value="https://facebook.com/unseengeeks">
+                <label for="instagramInput"><i class="fab fa-instagram"></i> Instagram:</label>
+                <input type="text" id="instagramInput" class="form-control" value="https://instagram.com/unseengeeks">
+                <!-- Certificates section -->
+                <div id="certificates">
+                    <div class="certificate">
+                        <label><i class="fas fa-award"></i> Award/Certification Image URL:</label>
+                        <input type="text" class="form-control awardImageInput" value="award.jpg">
+                        <label><i class="fas fa-trophy"></i> Award/Certification Name:</label>
+                        <input type="text" class="form-control awardNameInput" value="Best Developer">
+                        <label><i class="fas fa-info-circle"></i> Award/Certification Info:</label>
+                        <textarea class="form-control awardInfoInput">Details about the award or certification...</textarea>
+                    </div>
+                </div>
+                <button id="addCertificateBtn" class="btn btn-secondary mt-3">Add Certificate</button>
+                <button id="syncBtn" class="btn btn-primary mt-3">Sync</button>
+            </div>
+            <!-- Canvas container for displaying the portfolio -->
+            <div class="col-md-6 canvas-container">
+                <header class="bg-dark text-white text-center py-3">
+                    <h1 id="displayHeader">My Portfolio</h1>
+                </header>
+                <div class="container">
+                    <div class="profile d-flex align-items-center">
+                        <img id="displayImage" src="profile.jpg" alt="Profile Picture" class="rounded-circle mr-3">
+                        <div class="profile-info">
+                            <h1 id="displayName">UnSeen Geeks</h1>
+                            <p id="displayTitle">Web Developer</p>
+                        </div>
+                    </div>
+                    <section id="about">
+                        <h2><i class="fas fa-info-circle"></i> About Me</h2>
+                        <p id="displayAbout">Write something about yourself here...</p>
+                    </section>
+
+                    <section id="education">
+                        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                        <p id="displayEducation">List your educational background here...</p>
+                    </section>
+
+                    <section id="skills">
+                        <h2><i class="fas fa-tools"></i> Skills</h2>
+                        <p id="displaySkills">List your skills here...</p>
+                    </section>
+                    <section id="projects">
+                        <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+                        <p id="displayProjects">List your projects here...</p>
+                    </section>
+                    <section id="pastCareer">
+                        <h2><i class="fas fa-history"></i> Past Career</h2>
+                        <p id="displayPastCareer">Describe your past career here...</p>
+                    </section>
+                    <section id="futureGoals">
+                        <h2><i class="fas fa-bullseye"></i> Future Goals</h2>
+                        <p id="displayFutureGoals">Describe your future goals here...</p>
+                    </section>
+                    <section id="awards">
+                        <h2><i class="fas fa-award"></i> Awards & Certifications</h2>
+                        <div class="row" id="awardsContainer">
+                            <div class="col-md-6 award">
+                                <img src="award.jpg" alt="Award Image" class="img-fluid">
+                                <h3><i class="fas fa-trophy"></i> Best Developer</h3>
+                                <p>Details about the award or certification...</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="contact">
+                        <h2><i class="fas fa-address-book"></i> Contact</h2>
+                        <p id="displayMobile"><i class="fas fa-phone"></i> 123-456-7890</p>
+                        <p id="displayEmail"><i class="fas fa-envelope"></i> unseen.geeks@example.com</p>
+                        <p id="displayLinkedIn"><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/unseengeeks" id="linkedinLink" target="_blank">LinkedIn</a></p>
+                        <p id="displayGitHub"><i class="fab fa-github"></i> <a href="https://github.com/unseengeeks" id="githubLink" target="_blank">GitHub</a></p>
+                        <p id="displayFacebook"><i class="fab fa-facebook"></i> <a href="https://facebook.com/unseengeeks" id="facebookLink" target="_blank">Facebook</a></p>
+                        <p id="displayInstagram"><i class="fab fa-instagram"></i> <a href="https://instagram.com/unseengeeks" id="instagramLink" target="_blank">Instagram</a></p>
+                    </section>
+                </div>
+            </div>
+            <!-- Properties container for editing properties of selected elements -->
+            <div class="col-md-3 properties-container">
+                <h2>Properties</h2>
+                <div id="propertiesContent">
+                    <p>Select a field to edit its properties.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer section with buttons for exporting and previewing -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2023 UnSeen Geeks</p>
+        <button id="exportBtn" class="btn btn-primary">Export as HTML</button>
+        <button id="exportCssBtn" class="btn btn-secondary">Export CSS</button>
+        <button id="previewBtn" class="btn btn-secondary">Preview</button>
+    </footer>
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
