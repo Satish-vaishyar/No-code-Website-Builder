@@ -5,7 +5,7 @@ function syncContent() {
     document.getElementById('displayName').innerText = document.getElementById('nameInput').value;
     document.getElementById('displayTitle').innerText = document.getElementById('titleInput').value;
     document.getElementById('displayImage').src = document.getElementById('imageInput').value;
-    
+     
     // Sync about, projects, skills, past career, and future goals
     document.getElementById('displayAbout').innerText = document.getElementById('aboutInput').value;
     document.getElementById('displayProjects').innerText = document.getElementById('projectsInput').value;
@@ -386,8 +386,6 @@ function showProperties(element) {
             <input type="number" id="fontSizeInput" class="form-control" value="${window.getComputedStyle(targetElement).fontSize.replace('px', '')}">
             <label for="colorInput">Color:</label>
             <input type="color" id="colorInput" class="form-control" value="${rgbToHex(window.getComputedStyle(targetElement).color)}">
-            <label for="backgroundColorInput">Background Color:</label>
-            <input type="color" id="backgroundColorInput" class="form-control" value="${rgbToHex(window.getComputedStyle(targetElement).backgroundColor)}">
             <label for="textAlignInput">Text Align:</label>
             <select id="textAlignInput" class="form-control">
                 <option value="left" ${window.getComputedStyle(targetElement).textAlign === 'left' ? 'selected' : ''}>Left</option>
@@ -443,7 +441,6 @@ function showProperties(element) {
 function applyTextProperties(targetElement) {
     const fontSize = document.getElementById('fontSizeInput').value + 'px';
     const color = document.getElementById('colorInput').value;
-    const backgroundColor = document.getElementById('backgroundColorInput').value;
     const textAlign = document.getElementById('textAlignInput').value;
     const margin = document.getElementById('marginInput').value;
     const padding = document.getElementById('paddingInput').value;
@@ -458,7 +455,6 @@ function applyTextProperties(targetElement) {
 
     targetElement.style.fontSize = fontSize;
     targetElement.style.color = color;
-    targetElement.style.backgroundColor = backgroundColor;
     targetElement.style.textAlign = textAlign;
     targetElement.style.margin = margin;
     targetElement.style.padding = padding;

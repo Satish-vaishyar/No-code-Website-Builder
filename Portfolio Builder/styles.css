@@ -4,7 +4,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    color: #333; 
+    color: #333;
+    line-height: 1.6;
 }
 
 /* Header styling */
@@ -20,8 +21,7 @@ header {
 /* Main container styling */
 .container {
     width: 70%;
-    float: left;
-    margin: 1rem 0;
+    margin: 1rem auto;
     padding: 1rem;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
