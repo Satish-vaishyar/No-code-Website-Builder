@@ -14,7 +14,7 @@ This project is a personal portfolio website that allows users to edit and custo
 ## File Structure
 
 ```
-/C:/Users/Satish/OneDrive/Desktop/WT Project/Tester/T3 - Copy/
+No code Website Builder/Portfolio Builder/
 │
 ├── index.html
 ├── styles.css

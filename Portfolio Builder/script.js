@@ -1,14 +1,19 @@
 // Function to sync content from input fields to display fields
 function syncContent() {
+    // Sync header, name, title, and image
     document.getElementById('displayHeader').innerText = document.getElementById('headerInput').value;
     document.getElementById('displayName').innerText = document.getElementById('nameInput').value;
     document.getElementById('displayTitle').innerText = document.getElementById('titleInput').value;
     document.getElementById('displayImage').src = document.getElementById('imageInput').value;
+    
+    // Sync about, projects, skills, past career, and future goals
     document.getElementById('displayAbout').innerText = document.getElementById('aboutInput').value;
     document.getElementById('displayProjects').innerText = document.getElementById('projectsInput').value;
     document.getElementById('displaySkills').innerText = document.getElementById('skillsInput').value;
     document.getElementById('displayPastCareer').innerText = document.getElementById('pastCareerInput').value;
     document.getElementById('displayFutureGoals').innerText = document.getElementById('futureGoalsInput').value;
+    
+    // Sync contact details
     document.getElementById('displayMobile').innerHTML = `<i class="fas fa-phone"></i> ${document.getElementById('mobileInput').value}`;
     document.getElementById('displayEmail').innerHTML = `<i class="fas fa-envelope"></i> ${document.getElementById('emailInput').value}`;
     document.getElementById('linkedinLink').href = document.getElementById('linkedinInput').value;
@@ -21,6 +26,7 @@ function syncContent() {
     document.getElementById('instagramLink').innerText = document.getElementById('instagramInput').value;
     document.getElementById('displayEducation').innerText = document.getElementById('educationInput').value;
 
+    // Sync awards and certifications
     const awardsContainer = document.getElementById('awardsContainer');
     awardsContainer.innerHTML = '';
     const certificates = document.querySelectorAll('.certificate');
