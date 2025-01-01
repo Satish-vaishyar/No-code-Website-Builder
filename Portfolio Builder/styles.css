@@ -3,15 +3,15 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #afe1af;
+    color: #243e36;
     line-height: 1.6;
 }
 
 /* Header styling */
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: #243e36;
+    color: #f1f7ed;
     padding: 1rem;
     text-align: center;
     height: fit-content;
@@ -23,7 +23,7 @@ header {
     width: 70%;
     margin: 1rem auto;
     padding: 1rem;
-    background-color: #fff;
+    background-color: whitesmoke;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -50,7 +50,7 @@ header {
 }
 
 .profile p {
-    color: #666;
+    color: #243e36;
     font-size: 1rem;
 }
 
@@ -66,7 +66,7 @@ section {
 }
 
 section h2 {
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #243e36;
     padding-bottom: 0.5rem;
     font-size: 1.5rem;
 }
@@ -77,14 +77,14 @@ section h2 {
 #pastCareer p,
 #futureGoals p,
 #contact p {
-    color: #666;
+    color: #243e36;
     font-size: 1rem;
 }
 
 /* Footer styling */
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #243e36;
+    color: #f1f7ed;
     text-align: center;
     padding: 1rem;
     width: 100%;
@@ -93,14 +93,14 @@ footer {
 
 /* Editable section styling */
 .editable {
-    border: 1px dashed #ccc;
+    border: 1px dashed #243e36;
     padding: 0.5rem;
     cursor: text;
 }
 
 /* Editable container styling */
 .editable-container {
-    background-color: #fff;
+    background-color: #7ca982;
     border: 1px solid #ccc;
     padding: 1rem;
     margin: 1rem 0;
@@ -126,7 +126,7 @@ footer {
 
 /* Canvas container styling */
 .canvas-container {
-    background-color: #fff;
+    background-color: whitesmoke;
     border: 1px solid #ccc;
     padding: 1rem;
     margin: 1rem 0;
@@ -135,6 +135,11 @@ footer {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+}
+
+/* Form control styling */
+.form-control {
+    background-color: #afe1af;
 }
 
 /* Award image styling */
@@ -148,7 +153,7 @@ footer {
 
 /* Properties container styling */
 .properties-container {
-    background-color: #fff;
+    background-color: #7ca982;
     border: 1px solid #ccc;
     padding: 1rem;
     margin: 1rem 0;
@@ -182,8 +187,8 @@ footer {
 
 /* Button styling */
 button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #243e36;
+    color: #f1f7ed;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -191,7 +196,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #7ca982;
 }
 
 /* Responsive styling */

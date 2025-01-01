@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-control {
+            background-color: #afe1af;
+        }
+        .form-control:focus {
+            background-color: #d6f5d6;
+        }
+    </style>
 </head>
  
 <body>
@@ -64,7 +72,7 @@
                         <textarea class="form-control awardInfoInput">Details about the award or certification...</textarea>
                     </div>
                 </div>
-                <button id="addCertificateBtn" class="btn btn-secondary mt-3">Add Certificate</button>
+                <button id="addCertificateBtn" class="btn btn-primary mt-3">Add Certificate</button>
                 <button id="syncBtn" class="btn btn-primary mt-3">Sync</button>
             </div>
             <!-- Canvas container for displaying the portfolio -->
@@ -149,8 +157,8 @@
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 UnSeen Geeks</p>
         <button id="exportBtn" class="btn btn-primary">Export as HTML</button>
-        <button id="exportCssBtn" class="btn btn-secondary">Export CSS</button>
-        <button id="previewBtn" class="btn btn-secondary">Preview</button>
+        <button id="exportCssBtn" class="btn btn-primary">Export CSS</button>
+        <button id="previewBtn" class="btn btn-primary">Preview</button>
     </footer>
     <!-- Scripts -->
     <script src="script.js"></script>

@@ -4,93 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>No-Code Website Builder</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="blank_webpage.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <header>
+    <header class="bg-dark text-white text-center py-3">
         <h1>No-Code Website Builder</h1>
         <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul class="nav justify-content-center">
+                <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-    <div id="container">
-        <div id="toolbar">
+    <div id="container" class="d-flex">
+        <div id="toolbar" class="p-3" style="background-color: #7ca982;">
             <h2>Tool Box</h2>
             <!-- Drag-and-Drop Elements -->
-            <button draggable="true" ondragstart="drag(event)" id="text">Text</button>
-            <button draggable="true" ondragstart="drag(event)" id="image">Image</button>
-            <button draggable="true" ondragstart="drag(event)" id="button">Button</button>
-            <button draggable="true" ondragstart="drag(event)" id="header">Header</button>
-            <button draggable="true" ondragstart="drag(event)" id="footer">Footer</button>
-            <button draggable="true" ondragstart="drag(event)" id="paragraph">Paragraph</button>
-            <button draggable="true" ondragstart="drag(event)" id="list">List</button>
-            <button draggable="true" ondragstart="drag(event)" id="table">Table</button>
-            <button draggable="true" ondragstart="drag(event)" id="video">Video</button>
-            <!-- Dropdown for icons -->
-            <div id="icon-dropdown" class="dropdown">
-                <button class="dropbtn">Icons</button>
-                <div class="dropdown-content">
-                    <i draggable="true" ondragstart="drag(event)" id="icon-facebook" class="fab fa-facebook"></i>
-                    <i draggable="true" ondragstart="drag(event)" id="icon-twitter" class="fab fa-twitter"></i>
-                    <i draggable="true" ondragstart="drag(event)" id="icon-instagram" class="fab fa-instagram"></i>
-                    <i draggable="true" ondragstart="drag(event)" id="icon-linkedin" class="fab fa-linkedin"></i>
-                    <i draggable="true" ondragstart="drag(event)" id="icon-youtube" class="fab fa-youtube"></i>
-                </div>
-            </div>
-            <!-- Dropdown for shapes -->
-            <div id="shape-dropdown" class="dropdown">
-                <button class="dropbtn">Shapes</button>
-                <div class="dropdown-content">
-                    <div draggable="true" ondragstart="drag(event)" id="shape-square" class="shape square"></div>
-                    <div draggable="true" ondragstart="drag(event)" id="shape-circle" class="shape circle"></div>
-                    <div draggable="true" ondragstart="drag(event)" id="shape-rectangle" class="shape rectangle"></div>
-                    <div draggable="true" ondragstart="drag(event)" id="shape-oval" class="shape oval"></div>
-                </div>
-            </div>
-
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="text" style="background-color: #007bff;">Text</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="image" style="background-color: #007bff;">Image</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="button" style="background-color: #007bff;">Button</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="header" style="background-color: #007bff;">Header</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="footer" style="background-color: #007bff;">Footer</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="paragraph" style="background-color: #007bff;">Paragraph</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="list" style="background-color: #007bff;">List</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="table" style="background-color: #007bff;">Table</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="video" style="background-color: #007bff;">Video</button>
             <!-- AI Response Generator -->
-            <div class="response_generator">
+            <div class="response_generator mb-2">
                 <div class="form-group">
                     <form id="sentenceForm">
                         <label for="sentence">Take Suggestion from AI</label>
-                        <input type="text" id="sentence" name="sentence" class="response_generator_text" style="width: min-content; margin: 10px; padding: 10px;" placeholder="Enter a Sentence:">
-                        <button type="submit">Generate Response</button>
+                        <input type="text" id="sentence" name="sentence" class="form-control mb-2" placeholder="Enter a Sentence:">
+                        <button type="submit" class="btn btn-primary" style="background-color: #007bff;">Generate Response</button>
                     </form>
                 </div>
                 <div id="responseContainer" class="response_container"></div>
-            </div><br>
-
-            <button onclick="exportProject()" style="margin-top: auto;">Export</button>
-            <button onclick="livePreview()" style="margin-bottom: 70px;">Live Preview</button>
+            </div>
+            <button class="btn btn-success mb-2" onclick="exportProject()" style="background-color: #007bff;">Export</button>
+            <button class="btn btn-info" onclick="livePreview()" style="background-color: #007bff;">Live Preview</button>
         </div>
-        <div id="workspace" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 100%; height: calc(100vh - 100px);">
+        <div id="workspace" class="bg-white border p-3 flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 100%; height: calc(100vh - 100px);">
             <!-- Live Preview Workspace -->
         </div>
-        <div id="properties" style="display: none;">
+        <div id="properties" class="bg-light p-3" style="display: none;">
             <h2>Properties</h2>
             <!-- Properties Section -->
-            <textarea id="editor-text" placeholder="Edit text here..."></textarea>
-            <input type="file" id="editor-image" accept="image/*">
-            <input type="number" id="image-width" placeholder="Width (px)">
-            <input type="number" id="image-height" placeholder="Height (px)">
-            <input type="color" id="element-color" placeholder="Color">
-            <input type="text" id="element-font-size" placeholder="Font Size (px)">
-            <input type="text" id="element-background-color" placeholder="Background Color">
-            <input type="text" id="element-border" placeholder="Border">
-            <input type="text" id="element-padding" placeholder="Padding">
-            <input type="number" id="image-radius" placeholder="Border Radius (px)">
-            <input type="text" id="element-margin" placeholder="Margin">
-            <input type="text" id="element-width" placeholder="Width (px)">
-            <input type="text" id="element-height" placeholder="Height (px)">
-            <input type="text" id="element-text-align" placeholder="Text Align">
-            <input type="text" id="element-display" placeholder="Display">
-            <select id="header-type">
+            <textarea id="editor-text" class="form-control mb-2" placeholder="Edit text here..."></textarea>
+            <input type="file" id="editor-image" class="form-control mb-2" accept="image/*">
+            <input type="number" id="image-width" class="form-control mb-2" placeholder="Width (px)">
+            <input type="number" id="image-height" class="form-control mb-2" placeholder="Height (px)">
+            <input type="color" id="element-color" class="form-control mb-2" placeholder="Color">
+            <input type="text" id="element-font-size" class="form-control mb-2" placeholder="Font Size (px)">
+            <input type="text" id="element-background-color" class="form-control mb-2" placeholder="Background Color">
+            <input type="text" id="element-border" class="form-control mb-2" placeholder="Border">
+            <input type="text" id="element-padding" class="form-control mb-2" placeholder="Padding">
+            <input type="number" id="image-radius" class="form-control mb-2" placeholder="Border Radius (px)">
+            <input type="text" id="element-margin" class="form-control mb-2" placeholder="Margin">
+            <input type="text" id="element-width" class="form-control mb-2" placeholder="Width (px)">
+            <input type="text" id="element-height" class="form-control mb-2" placeholder="Height (px)">
+            <input type="text" id="element-text-align" class="form-control mb-2" placeholder="Text Align">
+            <input type="text" id="element-display" class="form-control mb-2" placeholder="Display">
+            <select id="header-type" class="form-control mb-2">
                 <option value="H1">H1</option>
                 <option value="H2">H2</option>
                 <option value="H3">H3</option>
@@ -98,39 +78,46 @@
                 <option value="H5">H5</option>
                 <option value="H6">H6</option>
             </select>
-            <select id="element-font-family">
+            <select id="element-font-family" class="form-control mb-2">
                 <option value="Arial">Arial</option>
                 <option value="Verdana">Verdana</option>
                 <option value="Times New Roman">Times New Roman</option>
                 <option value="Georgia">Georgia</option>
                 <option value="Courier New">Courier New</option>
             </select>
-            <button id="element-bold">Bold</button>
-            <button id="element-italic">Italic</button>
-            <button id="element-underline">Underline</button>
-            <input type="text" id="element-hyperlink" placeholder="Hyperlink">
-            <input type="text" id="video-src" placeholder="Video Source URL">
-            <input type="number" id="video-width" placeholder="Video Width (px)">
-            <input type="number" id="video-height" placeholder="Video Height (px)">
-            <input type="text" id="table-rows" placeholder="Number of Rows">
-            <input type="text" id="table-cols" placeholder="Number of Columns">
-            <input type="text" id="table-border" placeholder="Table Border">
-            <input type="text" id="table-padding" placeholder="Table Padding">
-            <input type="text" id="table-margin" placeholder="Table Margin">
-            <input type="text" id="table-cellspacing" placeholder="Cell Spacing">
-            <input type="color" id="canvas-background-color" placeholder="Canvas Background Color">
-            <select id="canvas-animation">
+            <button id="element-bold" class="btn btn-secondary mb-2" style="background-color: #007bff;">Bold</button>
+            <button id="element-italic" class="btn btn-secondary mb-2" style="background-color: #007bff;">Italic</button>
+            <button id="element-underline" class="btn btn-secondary mb-2" style="background-color: #007bff;">Underline</button>
+            <input type="text" id="element-hyperlink" class="form-control mb-2" placeholder="Hyperlink">
+            <input type="text" id="video-src" class="form-control mb-2" placeholder="Video Source URL">
+            <input type="number" id="video-width" class="form-control mb-2" placeholder="Video Width (px)">
+            <input type="number" id="video-height" class="form-control mb-2" placeholder="Video Height (px)">
+            <input type="text" id="table-rows" class="form-control mb-2" placeholder="Number of Rows">
+            <input type="text" id="table-cols" class="form-control mb-2" placeholder="Number of Columns">
+            <input type="text" id="table-border" class="form-control mb-2" placeholder="Table Border">
+            <input type="text" id="table-padding" class="form-control mb-2" placeholder="Table Padding">
+            <input type="text" id="table-margin" class="form-control mb-2" placeholder="Table Margin">
+            <input type="text" id="table-cellspacing" class="form-control mb-2" placeholder="Cell Spacing">
+            <input type="color" id="canvas-background-color" class="form-control mb-2" placeholder="Canvas Background Color">
+            <select id="canvas-animation" class="form-control mb-2">
                 <option value="">None</option>
                 <option value="fade-in">Fade In</option>
                 <option value="slide-in">Slide In</option>
                 <option value="zoom-in">Zoom In</option>
             </select>
-            <input type="text" id="icon-class" placeholder="Icon Class (e.g., fas fa-star)">
-            <button id="delete-element" onclick="deleteElement()">Delete Element</button>
+            <input type="text" id="icon-class" class="form-control mb-2" placeholder="Icon Class (e.g., fas fa-star)">
+            <button id="delete-element" class="btn btn-danger" onclick="deleteElement()">Delete Element</button>
         </div>
     </div>
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 No-Code Website Builder</p>
+    </footer>
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="blank_webpage.js"></script>
 
     <script>
@@ -170,7 +157,7 @@
                 const textResponse = data.choices[0].message.content; // Extract the text response
                 console.log('Text Response:', textResponse); // Log the text response
                 const responseContainer = document.getElementById('responseContainer');
-                responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton">Copy Text</button>`;
+                responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton" class="btn btn-secondary mt-2" style="background-color: #007bff;">Copy Text</button>`;
 
                 const copyButton = document.getElementById('copyButton');
                 copyButton.addEventListener('click', () => {
@@ -185,8 +172,5 @@
             }
         }
     </script>
-    <footer>
-        <p>&copy; 2024 No-Code Website Builder</p>
-    </footer>
 </body>
 </html>

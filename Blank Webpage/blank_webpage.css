@@ -6,23 +6,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: #f1f7ed;
+    color: #243e36;
 }
 
 /* Header styles */
 header {
     width: 100%;
-    background-color: #007BFF;
+    background-color: #243e36;
     color: white;
     text-align: center;
     padding: 20px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
-}
-
-header:hover {
-    background-color: #0056b3;
 }
 
 header h1 {
@@ -48,17 +44,13 @@ header nav ul li a {
     transition: color 0.3s ease;
 }
 
-header nav ul li a:hover {
-    color: #ffdd57;
-}
-
 /* Footer styles */
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 40px;
-    background-color: #007BFF;
+    background-color: #243e36;
     color: white;
     text-align: center;
     padding: 10px;
@@ -67,7 +59,7 @@ footer {
 }
 
 footer:hover {
-    background-color: #0056b3;
+    background-color: #7ca982;
 }
 
 /* Container styles */
@@ -82,6 +74,7 @@ footer:hover {
 #toolbar {
     margin: 10px;
     padding: 20px;
+    margin-bottom: 100px;
     border: 1px solid #ccc;
     width: 20%;
     height: fit-content;
@@ -89,7 +82,7 @@ footer:hover {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: white;
+    background-color: #7ca982;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     transition: transform 0.3s ease;
@@ -102,7 +95,7 @@ footer:hover {
 #toolbar h2 {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: #007BFF;
+    color: #243e36;
 }
 
 #toolbar button {
@@ -111,17 +104,12 @@ footer:hover {
     padding: 10px;
     cursor: pointer;
     text-align: center;
-    background-color: #007BFF;
-    color: white;
+    background-color: #243e36;
+    color: #f1f7ed;
     border: none;
     border-radius: 5px;
     font-size: 1em;
     transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-#toolbar button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
 }
 
 /* Workspace styles */
@@ -136,7 +124,7 @@ footer:hover {
     align-items: center;
     justify-content: flex-start;
     overflow-y: auto;
-    background-color: white;
+    background-color: whitesmoke;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     position: relative;
@@ -158,7 +146,7 @@ footer:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: #7ca982;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     transition: transform 0.3s ease;
@@ -171,7 +159,7 @@ footer:hover {
 #properties h2 {
     margin-bottom: 20px;
     font-size: 1.5em;
-    color: #007BFF;
+    color: #243e36;
 }
 
 #icon-class {
@@ -183,8 +171,8 @@ button {
     padding: 10px;
     margin: 5px;
     cursor: pointer;
-    background-color: #007BFF;
-    color: white;
+    /* background-color: #243e36; */
+    color: #f1f7ed;
     border: none;
     border-radius: 5px;
     font-size: 1em;
@@ -192,7 +180,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    /* background-color: #7ca982; */
     transform: translateY(-2px);
 }
 
@@ -290,8 +278,8 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     padding: 10px;
     cursor: pointer;
     text-align: center;
-    background-color: #007BFF;
-    color: white;
+    background-color: #243e36;
+    color: #f1f7ed;
     border: none;
     border-radius: 5px;
     font-size: 1em;
@@ -299,14 +287,14 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
 }
 
 .dropbtn:hover {
-    background-color: #0056b3;
+    background-color: #7ca982;
     transform: translateY(-2px);
 }
 
 .dropdown-content {
     display: none;
     /* position: absolute; */
-    background-color: white;
+    background-color: #f1f7ed;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1;
     width: 100%;
@@ -321,12 +309,12 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
 
 .dropdown:hover .dropdown-content {
     display: grid;
-    background-color: thistle;
+    background-color: #f1f7ed;
 }
 
 .dropbtn:hover + .dropdown-content {
     display: grid;
-    background-color: thistle;
+    background-color: #f1f7ed;
 }
 
 .dropdown-content i, .dropdown-content .shape {
@@ -338,14 +326,14 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
 }
 
 .dropdown-content i:hover, .dropdown-content .shape:hover {
-    background-color: grey;
+    background-color: #243e36;
 }
 
 /* Shape styles */
 .shape {
     width: 50px;
     height: 50px;
-    background-color: white;
+    background-color: #f1f7ed;
     border: 2px solid black;
 }
 
@@ -362,7 +350,7 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     height: 0;
     border-left: 25px solid transparent;
     border-right: 25px solid transparent;
-    border-bottom: 50px solid black;
+    border-bottom: 50px solid #243e36;
 }
 
 .shape.rectangle {
@@ -380,7 +368,7 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     width: 0;
     border-style: solid;
     border-width: 0 25px 43.3px 25px;
-    border-color: transparent transparent black transparent;
+    border-color: transparent transparent #243e36 transparent;
     position: relative;
 }
 
@@ -392,9 +380,9 @@ textarea, input[type="file"], input[type="number"], input[type="text"], input[ty
     width: 0;
     border-style: solid;
     border-width: 25px 25px 0 25px;
-    border-color: black transparent transparent transparent;
+    border-color: #243e36 transparent transparent transparent;
 }
 
 i {
-    color: black;
+    color: #243e36;
 }
