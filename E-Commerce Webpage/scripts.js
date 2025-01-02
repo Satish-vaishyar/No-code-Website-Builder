@@ -6,7 +6,7 @@ const shopAddressPreview = document.getElementById('shop-address-preview');
 
 let shopDisplayed = false;
 
-// Function to add a product
+// User-defined function to add a product
 function addProduct() {
     const shopName = document.getElementById('shop-name').value;
     const shopAddress = document.getElementById('shop-address').value;
@@ -43,7 +43,7 @@ function addProduct() {
     }
 
     // Read the image file and create the product HTML
-    const reader = new FileReader();
+    const reader = new FileReader(); // Built-in function
     reader.onload = (e) => {
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=I'm%20interested%20in%20your%20product%20${encodeURIComponent(name)}.`;
 
@@ -66,7 +66,7 @@ function addProduct() {
     reader.readAsDataURL(imageInput.files[0]);
 }
 
-// Function to export CSS
+// User-defined function to export CSS
 function exportCSS() {
     const cssContent = `
 /* Basic styles for the body and layout */
@@ -258,14 +258,14 @@ button:hover {
     }
 `;
 
-    const blob = new Blob([cssContent], { type: 'text/css' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    const blob = new Blob([cssContent], { type: 'text/css' }); // Built-in function
+    const a = document.createElement('a'); // Built-in function
+    a.href = URL.createObjectURL(blob); // Built-in function
     a.download = 'styles.css';
-    a.click();
+    a.click(); // Built-in function
 }
 
-// Function to export HTML
+// User-defined function to export HTML
 function exportHTML() {
     const shopName = document.getElementById('shop-name').value;
     const shopAddress = document.getElementById('shop-address').value;
@@ -293,18 +293,18 @@ function exportHTML() {
 </body>
 </html>`;
 
-    const blob = new Blob([htmlContent], { type: 'text/html' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    const blob = new Blob([htmlContent], { type: 'text/html' }); // Built-in function
+    const a = document.createElement('a'); // Built-in function
+    a.href = URL.createObjectURL(blob); // Built-in function
     a.download = 'ecommerce.html';
-    a.click();
+    a.click(); // Built-in function
 }
 
-// Function to preview website
+// User-defined function to preview website
 function previewWebsite() {
     const shopName = document.getElementById('shop-name').value;
     const shopAddress = document.getElementById('shop-address').value;
-    const previewWindow = window.open('', '_blank');
+    const previewWindow = window.open('', '_blank'); // Built-in function
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -329,19 +329,19 @@ function previewWebsite() {
 </body>
 </html>`;
 
-    previewWindow.document.write(htmlContent);
-    previewWindow.document.close();
+    previewWindow.document.write(htmlContent); // Built-in function
+    previewWindow.document.close(); // Built-in function
 }
 
-// Response Generator
+// Event listener for AI response generation form submission
 document.getElementById('sentenceForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
+    event.preventDefault(); // Built-in function
     const sentence = document.getElementById('sentence').value;
     console.log('Sentence:', sentence); // Log the sentence
-    await generateResponse(sentence);
+    await generateResponse(sentence); // User-defined function
 });
 
-// Function to generate response from AI
+// User-defined function to generate response from AI
 async function generateResponse(sentence) {
     const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
     const loadingSpinner = document.getElementById('loadingSpinner');
@@ -352,7 +352,7 @@ async function generateResponse(sentence) {
         loadingSpinner.style.display = 'block';
         responseContainer.innerHTML = '';
 
-        const response = await fetch(apiUrl, {
+        const response = await fetch(apiUrl, { // Built-in function
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -367,10 +367,10 @@ async function generateResponse(sentence) {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response was not ok'); // Built-in function
         }
 
-        const data = await response.json();
+        const data = await response.json(); // Built-in function
         console.log('Response:', data); // Log the response
 
         const textResponse = data.choices[0].message.content; // Extract the text response
@@ -379,8 +379,8 @@ async function generateResponse(sentence) {
 
         const copyButton = document.getElementById('copyButton');
         copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(textResponse).then(() => {
-                alert('Text copied to clipboard');
+            navigator.clipboard.writeText(textResponse).then(() => { // Built-in function
+                alert('Text copied to clipboard'); // Built-in function
             }).catch(err => {
                 console.error('Error copying text:', err);
             });

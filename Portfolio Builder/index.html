@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .form-control {
-            background-color: #afe1af;
+            background-color: #f4f0c3;
         }
+
         .form-control:focus {
-            background-color: #d6f5d6;
+            background-color: #e8e082;
         }
     </style>
 </head>
+
 <body>
     <!-- Header section -->
     <header class="bg-dark text-white text-center py-3">
@@ -68,10 +71,20 @@
                         <label><i class="fas fa-trophy"></i> Award/Certification Name:</label>
                         <input type="text" class="form-control awardNameInput" value="Best Developer">
                         <label><i class="fas fa-info-circle"></i> Award/Certification Info:</label>
-                        <textarea class="form-control awardInfoInput">Details about the award or certification...</textarea>
+                        <textarea
+                            class="form-control awardInfoInput">Details about the award or certification...</textarea>
                     </div>
                 </div>
-                <button id="addCertificateBtn" class="btn btn-primary mt-3">Add Certificate</button>
+                <button id="addCertificateBtn" class="btn btn-primary mt-3">Add Certificate</button><br>
+                <!-- AI Response Generator -->
+                <h2>Take Suggestion from AI</h2>
+                <div class="response_generator mb-2">
+                    <input type="text" id="prompt" placeholder="Enter your prompt here">
+                    <!-- Button to get completion -->
+                    <button onclick="getCompletion()" class="btn btn-primary mt-3">Get Completion</button>
+                    <!-- Response display area -->
+                    <div id="response"></div>
+                </div>
                 <button id="syncBtn" class="btn btn-primary mt-3">Sync</button>
             </div>
             <!-- Canvas container for displaying the portfolio -->
@@ -136,10 +149,17 @@
                         <h2><i class="fas fa-address-book"></i> Contact</h2>
                         <p id="displayMobile"><i class="fas fa-phone"></i> 123-456-7890</p>
                         <p id="displayEmail"><i class="fas fa-envelope"></i> unseen.geeks@example.com</p>
-                        <p id="displayLinkedIn"><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/unseengeeks" id="linkedinLink" target="_blank">LinkedIn</a></p>
-                        <p id="displayGitHub"><i class="fab fa-github"></i> <a href="https://github.com/unseengeeks" id="githubLink" target="_blank">GitHub</a></p>
-                        <p id="displayFacebook"><i class="fab fa-facebook"></i> <a href="https://facebook.com/unseengeeks" id="facebookLink" target="_blank">Facebook</a></p>
-                        <p id="displayInstagram"><i class="fab fa-instagram"></i> <a href="https://instagram.com/unseengeeks" id="instagramLink" target="_blank">Instagram</a></p>
+                        <p id="displayLinkedIn"><i class="fab fa-linkedin"></i> <a
+                                href="https://linkedin.com/in/unseengeeks" id="linkedinLink"
+                                target="_blank">LinkedIn</a></p>
+                        <p id="displayGitHub"><i class="fab fa-github"></i> <a href="https://github.com/unseengeeks"
+                                id="githubLink" target="_blank">GitHub</a></p>
+                        <p id="displayFacebook"><i class="fab fa-facebook"></i> <a
+                                href="https://facebook.com/unseengeeks" id="facebookLink" target="_blank">Facebook</a>
+                        </p>
+                        <p id="displayInstagram"><i class="fab fa-instagram"></i> <a
+                                href="https://instagram.com/unseengeeks" id="instagramLink"
+                                target="_blank">Instagram</a></p>
                     </section>
                 </div>
             </div>
@@ -165,4 +185,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

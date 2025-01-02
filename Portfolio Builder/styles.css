@@ -100,7 +100,8 @@ footer {
 
 /* Editable container styling */
 .editable-container {
-    background-color: #7ca982;
+    background-color: #213555;
+    color: #d8c4b6;
     border: 1px solid #ccc;
     padding: 1rem;
     margin: 1rem 0;
@@ -122,6 +123,14 @@ footer {
     margin: 0.5rem 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #d9eafd;
+}
+
+.editable-container input:focus,
+.editable-container textarea:focus,
+.properties-container input:focus,
+.properties-container select:focus {
+    background-color: #c5e3f6;
 }
 
 /* Canvas container styling */
@@ -153,7 +162,8 @@ footer {
 
 /* Properties container styling */
 .properties-container {
-    background-color: #7ca982;
+    background-color: #213555;
+    color: #d8c4b6;
     border: 1px solid #ccc;
     padding: 1rem;
     margin: 1rem 0;
@@ -173,6 +183,7 @@ footer {
 .properties-container label {
     display: block;
     margin-top: 0.5rem;
+    color: #d8c4b6;
 }
 
 .properties-container input,
@@ -183,6 +194,7 @@ footer {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 1rem;
+    background-color: #d9eafd;
 }
 
 /* Button styling */

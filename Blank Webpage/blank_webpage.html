@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>No-Code Website Builder</title>
@@ -8,10 +10,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Add required icons using CDNJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="blank_webpage.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <!-- Header Section -->
     <header class="bg-dark text-white text-center py-3">
         <h1>No-Code Website Builder</h1>
         <nav>
@@ -22,40 +34,59 @@
             </ul>
         </nav>
     </header>
+
+    <!-- Main Container -->
     <div id="container" class="d-flex">
-        <div id="toolbar" class="p-3" style="background-color: #7ca982;">
+        <!-- Toolbar Section -->
+        <div id="toolbar" class="p-3" style="background-color: #213555;">
             <h2>Tool Box</h2>
             <!-- Drag-and-Drop Elements -->
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="text" style="background-color: #007bff;">Text</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="image" style="background-color: #007bff;">Image</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="button" style="background-color: #007bff;">Button</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="header" style="background-color: #007bff;">Header</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="footer" style="background-color: #007bff;">Footer</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="paragraph" style="background-color: #007bff;">Paragraph</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="list" style="background-color: #007bff;">List</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="table" style="background-color: #007bff;">Table</button>
-            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="video" style="background-color: #007bff;">Video</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="text"
+                style="background-color: #007bff;">Text</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="image"
+                style="background-color: #007bff;">Image</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="button"
+                style="background-color: #007bff;">Button</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="header"
+                style="background-color: #007bff;">Header</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="footer"
+                style="background-color: #007bff;">Footer</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="paragraph"
+                style="background-color: #007bff;">Paragraph</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="list"
+                style="background-color: #007bff;">List</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="table"
+                style="background-color: #007bff;">Table</button>
+            <button class="btn btn-primary mb-2" draggable="true" ondragstart="drag(event)" id="video"
+                style="background-color: #007bff;">Video</button>
             <!-- AI Response Generator -->
+            <h2>Take Suggestion from AI</h2>
             <div class="response_generator mb-2">
-                <div class="form-group">
-                    <form id="sentenceForm">
-                        <label for="sentence">Take Suggestion from AI</label>
-                        <input type="text" id="sentence" name="sentence" class="form-control mb-2" placeholder="Enter a Sentence:">
-                        <button type="submit" class="btn btn-primary" style="background-color: #007bff;">Generate Response</button>
-                    </form>
-                </div>
-                <div id="responseContainer" class="response_container"></div>
+                <input type="text" id="prompt" placeholder="Enter your prompt here">
+                <!-- Button to get completion -->
+                <button onclick="getCompletion()">Get Completion</button>
+                <!-- Response display area -->
+                <div id="response"></div>
             </div>
-            <button class="btn btn-success mb-2" onclick="exportProject()" style="background-color: #007bff;">Export</button>
-            <button class="btn btn-info" onclick="livePreview()" style="background-color: #007bff;">Live Preview</button>
+            <!-- Export and Live Preview Buttons -->
+            <button class="btn btn-success mb-2" onclick="exportProject()"
+                style="background-color: #007bff;">Export</button>
+            <button class="btn btn-info" onclick="livePreview()" style="background-color: #007bff;">Live
+                Preview</button>
         </div>
-        <div id="workspace" class="bg-white border p-3 flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 100%; height: calc(100vh - 100px);">
+
+        <!-- Workspace Section -->
+        <div id="workspace" class="bg-white border p-3 flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)"
+            style="width: 100%; height: calc(100vh - 100px);">
             <!-- Live Preview Workspace -->
         </div>
-        <div id="properties" class="bg-light p-3" style="display: none;">
+
+        <!-- Properties Section -->
+        <div id="properties" class="p-3" style="display: none; background-color: #213555;">
             <h2>Properties</h2>
             <!-- Properties Section -->
-            <textarea id="editor-text" class="form-control mb-2" placeholder="Edit text here..."></textarea>
+            <textarea id="editor-text" class="form-control mb-2" style="background-color: #d9eafd;"
+                placeholder="Edit text here..."></textarea>
             <input type="file" id="editor-image" class="form-control mb-2" accept="image/*">
             <input type="number" id="image-width" class="form-control mb-2" placeholder="Width (px)">
             <input type="number" id="image-height" class="form-control mb-2" placeholder="Height (px)">
@@ -86,8 +117,10 @@
                 <option value="Courier New">Courier New</option>
             </select>
             <button id="element-bold" class="btn btn-secondary mb-2" style="background-color: #007bff;">Bold</button>
-            <button id="element-italic" class="btn btn-secondary mb-2" style="background-color: #007bff;">Italic</button>
-            <button id="element-underline" class="btn btn-secondary mb-2" style="background-color: #007bff;">Underline</button>
+            <button id="element-italic" class="btn btn-secondary mb-2"
+                style="background-color: #007bff;">Italic</button>
+            <button id="element-underline" class="btn btn-secondary mb-2"
+                style="background-color: #007bff;">Underline</button>
             <input type="text" id="element-hyperlink" class="form-control mb-2" placeholder="Hyperlink">
             <input type="text" id="video-src" class="form-control mb-2" placeholder="Video Source URL">
             <input type="number" id="video-width" class="form-control mb-2" placeholder="Video Width (px)">
@@ -98,7 +131,8 @@
             <input type="text" id="table-padding" class="form-control mb-2" placeholder="Table Padding">
             <input type="text" id="table-margin" class="form-control mb-2" placeholder="Table Margin">
             <input type="text" id="table-cellspacing" class="form-control mb-2" placeholder="Cell Spacing">
-            <input type="color" id="canvas-background-color" class="form-control mb-2" placeholder="Canvas Background Color">
+            <input type="color" id="canvas-background-color" class="form-control mb-2"
+                placeholder="Canvas Background Color">
             <select id="canvas-animation" class="form-control mb-2">
                 <option value="">None</option>
                 <option value="fade-in">Fade In</option>
@@ -109,9 +143,12 @@
             <button id="delete-element" class="btn btn-danger" onclick="deleteElement()">Delete Element</button>
         </div>
     </div>
+
+    <!-- Footer Section -->
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 No-Code Website Builder</p>
     </footer>
+
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
@@ -119,58 +156,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="blank_webpage.js"></script>
-
-    <script>
-        // AI Response Generator
-        document.getElementById('sentenceForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const sentence = document.getElementById('sentence').value;
-            console.log('Sentence:', sentence); // Log the sentence
-            await generateResponse(sentence);
-        });
-
-        async function generateResponse(sentence) {
-            const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        model: "grok-beta",
-                        messages: [
-                            { role: "system", content: "You are a test assistant." },
-                            { role: "user", content: sentence }
-                        ]
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                console.log('Response:', data); // Log the response
-
-                const textResponse = data.choices[0].message.content; // Extract the text response
-                console.log('Text Response:', textResponse); // Log the text response
-                const responseContainer = document.getElementById('responseContainer');
-                responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton" class="btn btn-secondary mt-2" style="background-color: #007bff;">Copy Text</button>`;
-
-                const copyButton = document.getElementById('copyButton');
-                copyButton.addEventListener('click', () => {
-                    navigator.clipboard.writeText(textResponse).then(() => {
-                        alert('Text copied to clipboard');
-                    }).catch(err => {
-                        console.error('Error copying text:', err);
-                    });
-                });
-            } catch (error) {
-                console.error('Error generating response:', error);
-            }
-        }
-    </script>
 </body>
+
 </html>

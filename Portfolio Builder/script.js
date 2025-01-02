@@ -1,4 +1,4 @@
-// Function to sync content from input fields to display fields
+// Function to sync content from input fields to display fields (User-defined function)
 function syncContent() {
     // Sync header, name, title, and image
     document.getElementById('displayHeader').innerText = document.getElementById('headerInput').value;
@@ -45,10 +45,10 @@ function syncContent() {
     });
 }
 
-// Event listener for sync button
+// Event listener for sync button (Built-in function)
 document.getElementById('syncBtn').addEventListener('click', syncContent);
 
-// Event listeners for input fields to sync content on input and focus
+// Event listeners for input fields to sync content on input and focus (Built-in function)
 document.querySelectorAll('.editable-container input, .editable-container textarea').forEach(element => {
     element.addEventListener('input', syncContent);
     element.addEventListener('focus', function() {
@@ -56,7 +56,7 @@ document.querySelectorAll('.editable-container input, .editable-container textar
     });
 });
 
-// Event listener for add certificate button
+// Event listener for add certificate button (Built-in function)
 document.getElementById('addCertificateBtn').addEventListener('click', function() {
     const certificatesContainer = document.getElementById('certificates');
     const certificateHTML = `
@@ -71,7 +71,7 @@ document.getElementById('addCertificateBtn').addEventListener('click', function(
     `;
     certificatesContainer.innerHTML += certificateHTML;
 
-    // Add event listeners to the new inputs and textareas
+    // Add event listeners to the new inputs and textareas (Built-in function)
     certificatesContainer.querySelectorAll('.awardImageInput, .awardNameInput, .awardInfoInput').forEach(element => {
         element.addEventListener('input', syncContent);
         element.addEventListener('focus', function() {
@@ -82,7 +82,7 @@ document.getElementById('addCertificateBtn').addEventListener('click', function(
     syncContent(); // Ensure the new certificate is synced immediately
 });
 
-// Ensure properties section is available for existing certification content
+// Ensure properties section is available for existing certification content (Built-in function)
 document.querySelectorAll('.awardImageInput, .awardNameInput, .awardInfoInput').forEach(element => {
     element.addEventListener('input', syncContent);
     element.addEventListener('focus', function() {
@@ -90,7 +90,7 @@ document.querySelectorAll('.awardImageInput, .awardNameInput, .awardInfoInput').
     });
 });
 
-// Event listener for export button to export HTML
+// Event listener for export button to export HTML (Built-in function)
 document.getElementById('exportBtn').addEventListener('click', function() {
     const canvasContent = document.querySelector('.canvas-container').innerHTML;
     const htmlContent = `
@@ -117,7 +117,7 @@ document.getElementById('exportBtn').addEventListener('click', function() {
     link.click();
 });
 
-// Event listener for export CSS button
+// Event listener for export CSS button (Built-in function)
 document.getElementById('exportCssBtn').addEventListener('click', function() {
     const cssContent = `
 body {
@@ -317,7 +317,7 @@ editable-container textarea {
     link.click();
 });
 
-// Event listener for preview button
+// Event listener for preview button (Built-in function)
 document.getElementById('previewBtn').addEventListener('click', function() {
     const canvasContent = document.querySelector('.canvas-container').innerHTML;
     const previewWindow = window.open('', '_blank');
@@ -340,7 +340,7 @@ document.getElementById('previewBtn').addEventListener('click', function() {
     previewWindow.document.close();
 });
 
-// Function to show properties of the selected element
+// Function to show properties of the selected element (User-defined function)
 function showProperties(element) {
     const propertiesContent = document.getElementById('propertiesContent');
     let targetElement;
@@ -437,7 +437,7 @@ function showProperties(element) {
     }
 }
 
-// Function to apply text properties to the target element
+// Function to apply text properties to the target element (User-defined function)
 function applyTextProperties(targetElement) {
     const fontSize = document.getElementById('fontSizeInput').value + 'px';
     const color = document.getElementById('colorInput').value;
@@ -470,7 +470,7 @@ function applyTextProperties(targetElement) {
     syncContent();
 }
 
-// Function to apply image properties to the target element
+// Function to apply image properties to the target element (User-defined function)
 function applyImageProperties(targetElement) {
     const width = document.getElementById('widthInput').value + 'px';
     const height = document.getElementById('heightInput').value + 'px';
@@ -495,10 +495,58 @@ function applyImageProperties(targetElement) {
     syncContent();
 }
 
-// Function to convert RGB color to HEX
+// Function to convert RGB color to HEX (User-defined function)
 function rgbToHex(rgb) {
     const result = rgb.match(/\d+/g).map(function(x) {
         return parseInt(x).toString(16).padStart(2, '0');
     });
     return `#${result.join('')}`;
+}
+
+
+// AI Response Generator
+// Function to get completion from the API (User-defined function)
+async function getCompletion() {
+    // Get the prompt value from the input element
+    const prompt = document.getElementById('prompt').value;
+    // Get the response element to display the result
+    const responseElement = document.getElementById('response');
+
+    // API URL
+    const url = 'http://localhost:1229/v1/completions'; // Updated URL to localhost
+    // Data to be sent in the request body
+    const data = {
+        model: 'llama-3.2-1b-instruct',  // Use the compatible model
+        prompt: prompt,
+        max_tokens: 100
+    };
+
+    try {
+        // Make a POST request to the API
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        // Check if the response is not ok
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON response
+        const result = await response.json();
+        let text = result.choices[0].text;
+
+        // Replace **text** with <b>text</b>
+        text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+        // Display the result in the response element
+        responseElement.innerHTML = text;
+    } catch (error) {
+        // Display the error message in the response element
+        responseElement.textContent = 'Error: ' + error.message;
+    }
 }

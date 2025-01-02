@@ -1,9 +1,9 @@
-// Allow drop event
+// User-defined function: Allow drop event
 function allowDrop(event) {
     event.preventDefault(); // Prevent default behavior to allow drop
 }
 
-// Handle drag event
+// User-defined function: Handle drag event
 function drag(event) {
     // Store the element ID and offset positions in the dataTransfer object
     event.dataTransfer.setData("elementId", event.target.id);
@@ -11,7 +11,7 @@ function drag(event) {
     event.dataTransfer.setData("offsetY", event.offsetY);
 }
 
-// Handle drop event
+// User-defined function: Handle drop event
 function drop(event) {
     event.preventDefault(); // Prevent default behavior
     var elementId = event.dataTransfer.getData("elementId");
@@ -114,9 +114,9 @@ function drop(event) {
         // Set element properties
         element.id = "element" + Date.now();
         element.draggable = true;
-        element.ondragstart = drag;
-        element.ondragend = repositionElement;
-        element.onclick = () => selectElement(element);
+        element.ondragstart = drag; // Drag event handler
+        element.ondragend = repositionElement; // Drag end event handler
+        element.onclick = () => selectElement(element); // Click event handler
         event.target.appendChild(element);
     } else {
         element = document.getElementById(elementId);
@@ -128,7 +128,7 @@ function drop(event) {
     element.style.top = (event.clientY - offsetY - event.target.offsetTop) + "px";
 }
 
-// Reposition element after dragging
+// User-defined function: Reposition element after dragging
 function repositionElement(event) {
     var offsetX = parseInt(event.dataTransfer.getData("offsetX"), 10);
     var offsetY = parseInt(event.dataTransfer.getData("offsetY"), 10);
@@ -138,7 +138,7 @@ function repositionElement(event) {
 
 var selectedElement = null;
 
-// Select an element to edit its properties
+// User-defined function: Select an element to edit its properties
 function selectElement(element) {
     selectedElement = element;
     var properties = document.getElementById("properties");
@@ -245,9 +245,9 @@ function selectElement(element) {
                 link.href = elementHyperlink.value;
                 link.id = element.id;
                 link.draggable = true;
-                link.ondragstart = drag;
-                link.ondragend = repositionElement;
-                link.onclick = () => selectElement(link);
+                link.ondragstart = drag; // Drag event handler
+                link.ondragend = repositionElement; // Drag end event handler
+                link.onclick = () => selectElement(link); // Click event handler
                 element.parentNode.replaceChild(link, element);
                 element = link;
             } else {
@@ -263,9 +263,9 @@ function selectElement(element) {
                 newHeader.style.cssText = element.style.cssText;
                 newHeader.id = element.id;
                 newHeader.draggable = true;
-                newHeader.ondragstart = drag;
-                newHeader.ondragend = repositionElement;
-                newHeader.onclick = () => selectElement(newHeader);
+                newHeader.ondragstart = drag; // Drag event handler
+                newHeader.ondragend = repositionElement; // Drag end event handler
+                newHeader.onclick = () => selectElement(newHeader); // Click event handler
                 element.parentNode.replaceChild(newHeader, element);
                 element = newHeader;
             };
@@ -516,7 +516,7 @@ function selectElement(element) {
     canvasAnimation.style.display = "block";
 }
 
-// Delete selected element
+// User-defined function: Delete selected element
 function deleteElement() {
     if (selectedElement) {
         selectedElement.remove();
@@ -525,7 +525,7 @@ function deleteElement() {
     }
 }
 
-// Convert RGB color to HEX
+// User-defined function: Convert RGB color to HEX
 function rgbToHex(rgb) {
     var result = rgb.match(/\d+/g).map(function(x) {
         return parseInt(x).toString(16).padStart(2, '0');
@@ -533,7 +533,7 @@ function rgbToHex(rgb) {
     return "#" + result.join('');
 }
 
-// Export project as HTML file
+// User-defined function: Export project as HTML file
 function exportProject() {
     var workspace = document.getElementById("workspace");
     var htmlContent = `
@@ -638,7 +638,7 @@ function exportProject() {
     saveAs(htmlBlob, "index.html");
 }
 
-// Live preview of the project
+// User-defined function: Live preview of the project
 function livePreview() {
     var workspace = document.getElementById("workspace");
     var htmlContent = workspace.innerHTML; // Capture the current state of the workspace
@@ -734,4 +734,52 @@ function livePreview() {
         </body>
         </html>
     `);
+}
+
+
+// User-defined function: AI Response Generator
+// Function to get completion from the API
+async function getCompletion() {
+    // Get the prompt value from the input element
+    const prompt = document.getElementById('prompt').value;
+    // Get the response element to display the result
+    const responseElement = document.getElementById('response');
+
+    // API URL
+    const url = 'http://localhost:1229/v1/completions'; // Updated URL to localhost
+    // Data to be sent in the request body
+    const data = {
+        model: 'llama-3.2-1b-instruct',  // Use the compatible model
+        prompt: prompt,
+        max_tokens: 100
+    };
+
+    try {
+        // Make a POST request to the API
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        // Check if the response is not ok
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON response
+        const result = await response.json();
+        let text = result.choices[0].text;
+
+        // Replace **text** with <b>text</b>
+        text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+        // Display the result in the response element
+        responseElement.innerHTML = text;
+    } catch (error) {
+        // Display the error message in the response element
+        responseElement.textContent = 'Error: ' + error.message;
+    }
 }
