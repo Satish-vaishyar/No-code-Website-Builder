@@ -48,16 +48,13 @@
             <input type="text" id="whatsapp-number" placeholder="+91 Enter 10 digit number">
         </div><br><br>
         <!-- AI Response Generator -->
-        <div class="response_generator">
-            <div class="form-group">
-                <form id="sentenceForm">
-                    <label for="sentence"><i class="fas fa-robot"></i> Take Suggestion from AI</label>
-                    <input type="text" id="sentence" name="sentence" placeholder="Enter a Sentence:">
-                    <button type="submit"><i class="fas fa-magic"></i> Generate Response</button>
-                </form>
-            </div>
-            <div class="spinner" id="loadingSpinner"></div>
-            <div id="responseContainer" class="response_container">The Response will be Generated here</div>
+        <h2><i class="fas fa-lightbulb"></i> Take Suggestion from AI</h2>
+        <div class="response_generator form-group mb-2">
+            <input type="text" id="prompt" placeholder="Enter your prompt here">
+            <!-- Button to get completion -->
+            <button onclick="getCompletion()" class="btn btn-primary mt-3">Get Completion</button>
+            <!-- Response display area -->
+            <div id="response" style="color: #d8c4b6;"></div>
         </div><br><br>
         <button onclick="addProduct()"><i class="fas fa-plus"></i> Add Product</button>
         <button onclick="exportCSS()"><i class="fas fa-file-export"></i> Export CSS</button>

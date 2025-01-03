@@ -16,13 +16,13 @@
         <nav>
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a>
+                    <a class="nav-link active" href="C:\Users\Satish\OneDrive\Desktop\No-code-Website-Builder\No-code-Website-Builder\Front Page\index.html"><i class="fas fa-home"></i> Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a> -->
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-envelope"></i> Contact</a>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-envelope"></i> Contact</a> -->
                 </li>
             </ul>
         </nav>
@@ -54,13 +54,24 @@
                 <button class="btn btn-primary mt-2" onclick="addImage()"><i class="fas fa-image"></i> Add
                     Image</button>
             </div>
+            <!-- AI Response Generator -->
+            <h3><i class="fas fa-lightbulb"></i> Take Suggestion from AI</h3>
+            <div class="response_generator mb-2">
+                <input type="text" id="prompt" placeholder="Enter your prompt here" style="color: black;">
+                <!-- Button to get completion -->
+                <button onclick="getCompletion()" class="btn btn-primary mt-3">Get Completion</button>
+                <!-- Response display area -->
+                <div id="response"></div>
+            </div>
             <button class="btn btn-primary mt-2" onclick="addYouTubeVideo()"><i class="fab fa-youtube"></i> Add YouTube
                 Video</button>
             <button class="btn btn-primary mt-2" onclick="addSocialMediaLink()"><i class="fas fa-share-alt"></i> Add
                 Social Media Link</button>
             <button class="btn btn-primary mt-2" onclick="previewContent()"><i class="fas fa-eye"></i> Preview</button>
-            <button class="btn btn-primary mt-2" onclick="exportContent()"><i class="fas fa-file-export"></i> Export HTML</button>
-            <button class="btn btn-primary mt-2" onclick="exportCSS()"><i class="fas fa-file-export"></i> Export CSS</button>
+            <button class="btn btn-primary mt-2" onclick="exportContent()"><i class="fas fa-file-export"></i> Export
+                HTML</button>
+            <button class="btn btn-primary mt-2" onclick="exportCSS()"><i class="fas fa-file-export"></i> Export
+                CSS</button>
         </div>
 
         <!-- Middle Container -->

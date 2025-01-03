@@ -485,3 +485,50 @@ function exportCSS() {
     cssLink.click();
     document.body.removeChild(cssLink);
 }
+
+// AI Response Generator
+// Function to get completion from the API (User-defined function)
+async function getCompletion() {
+    // Get the prompt value from the input element
+    const prompt = document.getElementById('prompt').value;
+    // Get the response element to display the result
+    const responseElement = document.getElementById('response');
+
+    // API URL
+    const url = 'http://localhost:1229/v1/completions'; // Updated URL to localhost
+    // Data to be sent in the request body
+    const data = {
+        model: 'llama-3.2-1b-instruct',  // Use the compatible model
+        prompt: prompt,
+        max_tokens: 100
+    };
+
+    try {
+        // Make a POST request to the API
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        // Check if the response is not ok
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON response
+        const result = await response.json();
+        let text = result.choices[0].text;
+
+        // Replace **text** with <b>text</b>
+        text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+        // Display the result in the response element
+        responseElement.innerHTML = text;
+    } catch (error) {
+        // Display the error message in the response element
+        responseElement.textContent = 'Error: ' + error.message;
+    }
+}

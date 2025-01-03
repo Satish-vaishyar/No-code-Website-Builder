@@ -333,63 +333,49 @@ function previewWebsite() {
     previewWindow.document.close(); // Built-in function
 }
 
-// Event listener for AI response generation form submission
-document.getElementById('sentenceForm').addEventListener('submit', async function (event) {
-    event.preventDefault(); // Built-in function
-    const sentence = document.getElementById('sentence').value;
-    console.log('Sentence:', sentence); // Log the sentence
-    await generateResponse(sentence); // User-defined function
-});
+// AI Response Generator
+// Function to get completion from the API (User-defined function)
+async function getCompletion() {
+    // Get the prompt value from the input element
+    const prompt = document.getElementById('prompt').value;
+    // Get the response element to display the result
+    const responseElement = document.getElementById('response');
 
-// User-defined function to generate response from AI
-async function generateResponse(sentence) {
-    const apiUrl = 'http://localhost:3000/proxy'; // Proxy server URL
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    const responseContainer = document.getElementById('responseContainer');
+    // API URL
+    const url = 'http://localhost:1229/v1/completions'; // Updated URL to localhost
+    // Data to be sent in the request body
+    const data = {
+        model: 'llama-3.2-1b-instruct',  // Use the compatible model
+        prompt: prompt,
+        max_tokens: 100
+    };
 
     try {
-        // Show loading spinner
-        loadingSpinner.style.display = 'block';
-        responseContainer.innerHTML = '';
-
-        const response = await fetch(apiUrl, { // Built-in function
+        // Make a POST request to the API
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                model: "grok-beta",
-                messages: [
-                    { role: "system", content: "You are a test assistant." },
-                    { role: "user", content: sentence }
-                ]
-            })
+            body: JSON.stringify(data)
         });
 
+        // Check if the response is not ok
         if (!response.ok) {
-            throw new Error('Network response was not ok'); // Built-in function
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data = await response.json(); // Built-in function
-        console.log('Response:', data); // Log the response
+        // Parse the JSON response
+        const result = await response.json();
+        let text = result.choices[0].text;
 
-        const textResponse = data.choices[0].message.content; // Extract the text response
-        console.log('Text Response:', textResponse); // Log the text response
-        responseContainer.innerHTML = `<p>${textResponse}</p><button id="copyButton"><i class="fas fa-copy"></i> Copy Text</button>`;
+        // Replace **text** with <b>text</b>
+        text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 
-        const copyButton = document.getElementById('copyButton');
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(textResponse).then(() => { // Built-in function
-                alert('Text copied to clipboard'); // Built-in function
-            }).catch(err => {
-                console.error('Error copying text:', err);
-            });
-        });
+        // Display the result in the response element
+        responseElement.innerHTML = text;
     } catch (error) {
-        console.error('Error generating response:', error);
-        responseContainer.innerHTML = `<p style="color: red;">Error generating response. Please try again.</p>`;
-    } finally {
-        // Hide loading spinner
-        loadingSpinner.style.display = 'none';
+        // Display the error message in the response element
+        responseElement.textContent = 'Error: ' + error.message;
     }
 }
