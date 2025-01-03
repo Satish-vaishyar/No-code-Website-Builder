@@ -14,6 +14,7 @@ body{
     max-width: 70rem;
     padding: 0 2rem;
     margin: 0 auto;
+    overflow: hidden; /* Added to remove scroll */
 }
 
 header{
