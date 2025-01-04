@@ -3,7 +3,7 @@ const previewArea = document.getElementById('product-preview');
 const shopInfo = document.getElementById('shop-info');
 const shopNamePreview = document.getElementById('shop-name-preview');
 const shopAddressPreview = document.getElementById('shop-address-preview');
-
+ 
 let shopDisplayed = false;
 
 // User-defined function to add a product
