@@ -54,6 +54,7 @@ function addProduct() {
                 <p><strong>Price:</strong> $${price}</p>
                 <img src="${e.target.result}" alt="${name}"><br>
                 <a href="${whatsappLink}" class="buy-now" target="_blank"><i class="fab fa-whatsapp"></i> Buy Now</a>
+                <button onclick="deleteProduct(this.parentElement)" class="delete-product"><i class="fas fa-trash-alt"></i> Delete</button>
             </div>
         `;
 
@@ -64,6 +65,14 @@ function addProduct() {
         }
     };
     reader.readAsDataURL(imageInput.files[0]);
+}
+
+// User-defined function to delete a product
+function deleteProduct(productElement) {
+    productElement.remove();
+    if (previewArea.innerHTML.trim() === '') {
+        previewArea.innerHTML = '<p>No products added yet.</p>';
+    }
 }
 
 // User-defined function to export CSS
@@ -269,10 +278,13 @@ button:hover {
 function exportHTML() {
     const shopName = document.getElementById('shop-name').value;
     const shopAddress = document.getElementById('shop-address').value;
+    let productHTML = previewArea.innerHTML;
+    productHTML = productHTML.replace(/<button.*?delete-product.*?<\/button>/g, ''); // Remove delete buttons
+
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${shopName}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -287,7 +299,7 @@ function exportHTML() {
             <hr>
         </div>
         <div class="product-grid">
-            ${previewArea.innerHTML}
+            ${productHTML}
         </div>
     </div>
 </body>
@@ -304,6 +316,9 @@ function exportHTML() {
 function previewWebsite() {
     const shopName = document.getElementById('shop-name').value;
     const shopAddress = document.getElementById('shop-address').value;
+    let productHTML = previewArea.innerHTML;
+    productHTML = productHTML.replace(/<button.*?delete-product.*?<\/button>/g, ''); // Remove delete buttons
+
     const previewWindow = window.open('', '_blank'); // Built-in function
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
@@ -323,7 +338,7 @@ function previewWebsite() {
             <hr>
         </div>
         <div class="product-grid">
-            ${previewArea.innerHTML}
+            ${productHTML}
         </div>
     </div>
 </body>
