@@ -288,6 +288,10 @@ p{
     justify-content: space-around;
 }
 
+p {
+    text-decoration: none;
+}
+
 .col-2{
     flex-basis: 50%;
     min-width: 300px;
@@ -393,5 +397,127 @@ ul{
     opacity: 1;
     visibility: visible;
   }
+
+#pricing {
+    padding: 60px 0;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
+
+#pricing h1 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.pricing-table {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.pricing-table .card {
+    background-color: #1a1a1a;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 1000px; /* Increase width */
+    margin: 20px;
+}
+
+.pricing-table .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-table .card-header {
+    background-color: #333;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 25px;
+    border-bottom: 1px solid #444;
+    text-transform: uppercase;
+}
+
+.pricing-table .card-body {
+    padding: 35px;
+}
+
+.pricing-table .card-body h3 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.pricing-table .card-body p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+#contact-details {
+    padding: 60px 0;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
+
+#contact-details h1 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+}
+
+#contact-details .card {
+    background-color: #1a1a1a;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 500px; /* Increase width */
+    margin: 20px auto;
+}
+
+#contact-details .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+#contact-details .card-body {
+    padding: 35px;
+    text-align: center; /* Center the text */
+}
+
+#contact-details .card-body h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: white;
+    text-transform: uppercase; /* Make the text uppercase */
+}
+
+#contact-details .card-body p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 15px; /* Add margin to separate paragraphs */
+}
+
+#contact-details .card-body a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: bold; /* Make the links bold */
+}
+
+#contact-details .card-body a:hover {
+    text-decoration: underline;
+    color: white; /* Change color on hover */
+}
 
 

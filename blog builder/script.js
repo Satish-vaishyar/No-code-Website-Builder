@@ -76,15 +76,19 @@ function selectElement(element) {
     // Show or hide image-specific properties
     const imageProperties = document.getElementById('imageProperties');
     const textProperties = document.getElementById('textProperties');
+    const deleteImageButton = document.getElementById('deleteImageButton');
     if (selectedElement.tagName === 'IMG') {
         imageProperties.style.display = 'block';
         textProperties.style.display = 'none';
+        deleteImageButton.style.display = 'block';
     } else if (selectedElement.tagName === 'IFRAME') {
         imageProperties.style.display = 'none';
         textProperties.style.display = 'none';
+        deleteImageButton.style.display = 'none';
     } else {
         imageProperties.style.display = 'none';
         textProperties.style.display = 'block';
+        deleteImageButton.style.display = 'none';
     }
 }
 
@@ -138,6 +142,16 @@ function deleteContent() {
     if (selectedElement) {
         selectedElement.remove();
         selectedElement = null;
+    }
+}
+
+// User-defined function to delete the selected image
+function deleteSelectedImage() {
+    if (selectedElement && selectedElement.tagName === 'IMG') {
+        selectedElement.remove();
+        selectedElement = null;
+        document.getElementById('imageProperties').style.display = 'none';
+        document.getElementById('deleteImageButton').style.display = 'none';
     }
 }
 
@@ -204,6 +218,17 @@ function checkYouTubeVideos() {
 // Call checkYouTubeVideos on page load to set the initial state of the delete button
 document.addEventListener('DOMContentLoaded', checkYouTubeVideos);
 
+// Add event listener for the delete image button
+document.addEventListener('DOMContentLoaded', () => {
+    const deleteImageButton = document.createElement('button');
+    deleteImageButton.id = 'deleteImageButton';
+    deleteImageButton.className = 'btn btn-danger mt-2';
+    deleteImageButton.textContent = 'Delete Selected Image';
+    deleteImageButton.style.display = 'none';
+    deleteImageButton.onclick = deleteSelectedImage;
+    document.getElementById('imageProperties').appendChild(deleteImageButton);
+});
+
 // User-defined function to add a social media link to the live preview
 function addSocialMediaLink() {
     const platform = prompt("Enter the social media platform (e.g., Facebook, Twitter, Instagram):").toLowerCase();
@@ -245,9 +270,35 @@ function previewContent() {
         <head>
             <title>Preview</title>
             ${stylesheets}
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f0f2f5;
+                }
+                .container {
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                    background-color: #fff;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    overflow-y: auto;
+                    margin: 10px;
+                }
+                .live-preview {
+                    padding: 20px;
+                    min-height: 100%;
+                    background: #ffffff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+                .live-preview > * {
+                    display: block;
+                    margin: 10px 0;
+                }
+            </style>
         </head>
         <body>
-            <div class="container">
+            <div class="container live-preview">
                 ${previewContent}
             </div>
         </body>
@@ -501,7 +552,7 @@ async function getCompletion() {
         model: 'llama-3.2-1b-instruct',  // Use the compatible model
         prompt: prompt,
         max_tokens: 100
-    };
+    }; 
 
     try {
         // Make a POST request to the API

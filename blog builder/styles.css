@@ -127,7 +127,7 @@ button:hover {
 }
 
 header, footer {
-    background-color: #007bff;
+    background-color: #343a40;
     color: #fff;
     text-align: center;
     padding: 10px 0;
@@ -153,8 +153,8 @@ header a, footer a {
 
     .container {
         margin: 10px 0;
-    }
-
+    } 
+ 
     .left-container, .right-container {
         flex: 1;
         max-width: 100%;

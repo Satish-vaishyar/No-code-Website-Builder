@@ -38,17 +38,17 @@ function drop(event) {
             element = document.createElement("h1");
             element.contentEditable = true;
             element.innerText = "Header";
-        } else if (data === "footer") {
-            element = document.createElement("footer");
-            element.contentEditable = true;
-            element.innerText = "Footer";
-            element.style.position = "fixed";
-            element.style.bottom = "0";
-            element.style.width = "100%";
-            element.style.height = "30px";
-            element.style.backgroundColor = "#f1f1f1";
-            element.style.textAlign = "center";
-            element.style.padding = "10px 0";
+            // } else if (data === "footer") {
+            //     element = document.createElement("footer");
+            //     element.contentEditable = true;
+            //     element.innerText = "Footer";
+            //     element.style.position = "fixed";
+            //     element.style.bottom = "0";
+            //     element.style.width = "100%";
+            //     element.style.height = "30px";
+            //     element.style.backgroundColor = "#f1f1f1";
+            //     element.style.textAlign = "center";
+            //     element.style.padding = "10px 0";
         } else if (data === "paragraph") {
             element = document.createElement("p");
             element.contentEditable = true;
@@ -317,7 +317,7 @@ function selectElement(element) {
         // Handle image properties
         editorImage.onchange = (event) => {
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 element.src = e.target.result;
             };
             reader.readAsDataURL(event.target.files[0]);
@@ -527,7 +527,7 @@ function deleteElement() {
 
 // User-defined function: Convert RGB color to HEX
 function rgbToHex(rgb) {
-    var result = rgb.match(/\d+/g).map(function(x) {
+    var result = rgb.match(/\d+/g).map(function (x) {
         return parseInt(x).toString(16).padStart(2, '0');
     });
     return "#" + result.join('');
